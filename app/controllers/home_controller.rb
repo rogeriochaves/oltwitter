@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   rescue_from Twitter::Error::BadRequest, with: :try_reauth
+  rescue_from Twitter::Error::Unauthorized, with: :try_reauth
   before_action :authenticate
 
   def index
@@ -48,7 +49,7 @@ class HomeController < ApplicationController
   end
 
   def try_reauth(exception)
-    if exception.to_s == "Bad Authentication data."
+    if exception.to_s == "Bad Authentication data." or exception.to_s == "Could not authenticate you."
       redirect_to '/auth/twitter'
     end
   end

@@ -8,7 +8,7 @@
 
 body {
   background: #9de4e7;
-  font-family: Helvetica, sans-serif;
+  font-family: "Lucida Grande", sans-serif;
   color: #384498;
   line-height: 1.2em;
   font-size: 14px;
@@ -22,14 +22,20 @@ h2 {
   font-size: 20px;
   font-weight: normal;
   padding-bottom: 8px;
+  font-family: Helvetica, sans-serif;
 }
 
 h2 {
   font-size: 18px;
+  padding-bottom: 0;
 }
 
 .logo {
-  padding-bottom: 6px;
+  margin-bottom: 8px;
+}
+
+.good-ol {
+  padding-left: 16px;
 }
 
 .title-character-count-area {
@@ -43,6 +49,7 @@ h2 {
   color: #cccccc;
   align-self: flex-end;
   padding-bottom: 4px;
+  font-family: Helvetica, sans-serif;
 }
 
 .wrapper {
@@ -92,6 +99,7 @@ input[type="submit"] {
   display: flex;
   justify-content: flex-end;
   padding-top: 8px;
+  padding-bottom: 12px;
 }
 
 hr {
@@ -125,6 +133,7 @@ a {
   min-width: 200px;
   background: #d2f9fa;
   border-radius: 0 5px 5px 0;
+  font-size: 12px;
 }
 
 .profile {
@@ -137,6 +146,7 @@ a {
   a.profile-name {
     font-weight: bold;
     color: #384498;
+    font-size: 14px;
   }
   .tweet-count {
     font-size: 11px;
@@ -187,5 +197,25 @@ a {
 
   img {
     margin-right: 8px;
+  }
+  h1 {
+    font-size: 32px;
+    line-height: 1.2em;
+    padding: 0;
+  }
+}
+
+.profile-timeline .tweet {
+  img {
+    display: none;
+  }
+  .author {
+    display: none;
+  }
+
+  &:first-child .tweet-text {
+    font-size: 24px;
+    line-height: 1.2em;
+    padding: 16px 0;
   }
 }

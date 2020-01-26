@@ -11,6 +11,7 @@ class HomeController < ApplicationController
       puts "Fetching twitter..."
       twitter.home_timeline(tweet_mode: "extended", count: 50)
     end
+    @user = session[:auth]["info"]
   end
 
   private

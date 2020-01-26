@@ -12,7 +12,10 @@
   <body>
     <div class="wrapper">
       <%= image_tag 'twitter-logo.png', height: '58px' %>
-      <%= yield %>
+      <div class="arrow-up"></div>
+      <div class="columns">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

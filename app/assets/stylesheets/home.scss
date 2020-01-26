@@ -46,19 +46,14 @@ h2 {
 
 .columns {
   display: flex;
+}
 
-  .content {
-    background: #ffffff;
-    flex-grow: 1;
-    border-right: 1px solid #cbaedb;
-    border-radius: 5px 0 0 5px;
-    padding: 18px;
-  }
-  .sidebar {
-    min-width: 200px;
-    background: #d2f9fa;
-    border-radius: 0 5px 5px 0;
-  }
+.content {
+  background: #ffffff;
+  flex-grow: 1;
+  border-right: 1px solid #cbaedb;
+  border-radius: 5px 0 0 5px;
+  padding: 18px;
 }
 
 .new-tweet {
@@ -117,4 +112,64 @@ a {
   &:hover {
     text-decoration: underline;
   }
+}
+
+.sidebar {
+  min-width: 200px;
+  background: #d2f9fa;
+  border-radius: 0 5px 5px 0;
+}
+
+.profile {
+  display: flex;
+  padding: 8px 14px 12px 14px;
+
+  img {
+    padding-right: 8px;
+  }
+  a.profile-name {
+    font-weight: bold;
+    color: #384498;
+  }
+  .tweet-count {
+    font-size: 10px;
+  }
+}
+
+.stats-counter {
+  padding: 0 14px;
+  display: flex;
+  font-size: 15px;
+  div {
+    padding-right: 6px;
+  }
+  .count-link {
+    font-size: 10px;
+  }
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  font-size: 13px;
+
+  .selected {
+    background: #e2ffff;
+    a {
+      color: #384498;
+    }
+  }
+  a {
+    display: block;
+    padding: 8px 14px;
+  }
+}
+
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #fff;
+  margin-left: 31px;
 }

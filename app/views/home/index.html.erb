@@ -17,7 +17,7 @@
         <%= image_tag tweet.user.profile_image_url_https(:reasonably_small).to_s, height: 48 %>
         <div class="tweet-text">
           <a href="/<%= tweet.user.screen_name %>" class="author"><%= tweet.user.screen_name %></a>
-          <%= tag_links format_tweet(tweet) %>
+          <%= format_tweet(tweet.as_json) %>
         </div>
       </div>
       <hr />

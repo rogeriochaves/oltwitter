@@ -7,9 +7,9 @@ class HomeController < ApplicationController
       return
     end
 
-    @tweets = Rails.cache.fetch("timeline123_#{session[:auth]["info"]["id"]}", expires_in: 2.minutes) do
+    @tweets = Rails.cache.fetch("timeline_#{session[:auth]["info"]["id"]}", expires_in: 2.minutes) do
       puts "Fetching twitter..."
-      twitter.home_timeline(tweet_mode: "extended")
+      twitter.home_timeline(tweet_mode: "extended", count: 50)
     end
   end
 

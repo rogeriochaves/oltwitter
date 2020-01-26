@@ -5,13 +5,23 @@
       <div class="character-count">140</div>
     </div>
 
-    <textarea name="tweet" class="tweet" contentEditable="true"></textarea>
+    <textarea autofocus name="tweet" class="new-tweet" contentEditable="true"></textarea>
     <div class="tweet-button-area">
       <button>Tweet</button>
     </div>
 
     <h2>Home</h2>
     <hr />
+    <% @tweets.each do |tweet| %>
+      <div class="tweet">
+        <%= image_tag tweet.user.profile_image_url_https(:reasonably_small).to_s, height: 48 %>
+        <div class="tweet-text">
+          <a href="/<%= tweet.user.screen_name %>" class="author"><%= tweet.user.screen_name %></a>
+          <%= tag_links format_tweet(tweet) %>
+        </div>
+      </div>
+      <hr />
+    <% end %>
   </main>
   <aside class="sidebar">
   </aside>

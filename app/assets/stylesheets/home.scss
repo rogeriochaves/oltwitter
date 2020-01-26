@@ -9,13 +9,15 @@
 body {
   background: #9de4e7;
   font-family: Helvetica, sans-serif;
+  color: #384498;
+  line-height: 1.2em;
+  font-size: 14px;
 }
 
 h1,
 h2 {
   margin: 0;
   font-size: 20px;
-  color: #384498;
   font-weight: normal;
   padding-bottom: 8px;
 }
@@ -59,7 +61,7 @@ h2 {
   }
 }
 
-.tweet {
+.new-tweet {
   border-radius: 5px;
   border: 1px solid #aaaaaa;
   resize: none;
@@ -93,4 +95,26 @@ button {
 hr {
   border: none;
   border-bottom: 1px solid #eeeeee;
+}
+
+.tweet {
+  display: flex;
+
+  img {
+    padding-right: 8px;
+  }
+  .tweet-text {
+    padding-top: 2px;
+  }
+  .author {
+    font-weight: bold;
+  }
+}
+
+a {
+  color: #1385b2;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 }

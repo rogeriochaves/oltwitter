@@ -1,0 +1,10 @@
+<% @tweets.each do |tweet| %>
+  <div class="tweet">
+    <%= image_tag tweet.user.profile_image_url_https(:reasonably_small).to_s, height: 48, width: 48 %>
+    <div class="tweet-text">
+      <a href="/<%= tweet.user.screen_name %>" class="author"><%= tweet.user.screen_name %></a>
+      <%= format_tweet(tweet.as_json) %>
+    </div>
+  </div>
+  <hr />
+<% end %>

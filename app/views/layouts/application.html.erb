@@ -6,16 +6,17 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <div class="wrapper">
-      <%= image_tag 'twitter-logo.png', height: '58px' %>
+      <a href="/"><%= image_tag 'twitter-logo.png', height: '42px', class: 'logo' %></a>
       <div class="arrow-up"></div>
       <div class="columns">
         <%= yield %>
       </div>
     </div>
+
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>

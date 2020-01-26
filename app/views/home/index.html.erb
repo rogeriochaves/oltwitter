@@ -1,52 +1,23 @@
 <main class="content">
-  <div class="title-character-count-area">
-    <h1>What's happening?</h1>
-    <div class="character-count">140</div>
-  </div>
+  <%= form_for :tweet, url: "/new" do |f| %>
+    <div class="title-character-count-area">
+      <h1>What's happening?</h1>
+      <div class="character-count">140</div>
+    </div>
 
-  <textarea autofocus name="tweet" class="new-tweet" contentEditable="true"></textarea>
-  <div class="tweet-button-area">
-    <button>Tweet</button>
-  </div>
+    <textarea autofocus name="tweet" class="new-tweet" contentEditable="true"></textarea>
+    <div class="tweet-button-area">
+      <input type="submit" value="Tweet" />
+    </div>
+  <% end %>
 
   <h2>Home</h2>
   <hr />
-  <% @tweets.each do |tweet| %>
-    <div class="tweet">
-      <%= image_tag tweet.user.profile_image_url_https(:reasonably_small).to_s, height: 48 %>
-      <div class="tweet-text">
-        <a href="/<%= tweet.user.screen_name %>" class="author"><%= tweet.user.screen_name %></a>
-        <%= format_tweet(tweet.as_json) %>
-      </div>
-    </div>
-    <hr />
-  <% end %>
+  <%= render partial: "timeline" %>
 </main>
 
 <aside class="sidebar">
-  <div class="profile">
-    <%= image_tag @user["profile_image_url_https"].gsub("_normal", "_reasonably_small"), height: 32 %>
-    <div>
-      <a href="<%= @user["screen_name"] %>" class="profile-name"><%= @user["screen_name"] %></a>
-      <div class="tweet-count">
-        <%= @user["statuses_count"] %> tweets
-      </div>
-    </div>
-  </div>
-  <div class="stats-counter">
-    <div>
-      <div><%= @user["friends_count"] %></div>
-      <a href="https://twitter.com/<%= @user["screen_name"] %>/following" class="count-link">following</a>
-    </div>
-    <div>
-      <div><%= @user["followers_count"] %></div>
-      <a href="https://twitter.com/<%= @user["screen_name"] %>/followers" class="count-link">followers</a>
-    </div>
-    <div>
-      <div><%= @user["listed_count"] %></div>
-      <a href="https://twitter.com/<%= @user["screen_name"] %>/lists" class="count-link">listed</a>
-    </div>
-  </div>
+  <%= render partial: "profile_stats", locals: { user: @user } %>
 
   <ul class="sidebar-menu">
     <li class="selected"><a href="/">Home</a></li>

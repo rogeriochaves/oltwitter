@@ -3,5 +3,8 @@ Rails.application.routes.draw do
 
   get '/twitter/callback', to: 'sessions#create'
 
+  get '/:screen_name', to: 'home#profile'
+  post '/new', to: 'home#new'
+
   root 'home#index'
 end

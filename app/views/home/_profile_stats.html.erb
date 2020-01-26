@@ -1,0 +1,23 @@
+<div class="profile">
+  <%= image_tag user["profile_image_url_https"].gsub("_normal", "_reasonably_small"), height: 32, width: 32 %>
+  <div>
+    <a href="<%= user["screen_name"] %>" class="profile-name"><%= user["screen_name"] %></a>
+    <div class="tweet-count">
+      <%= user["statuses_count"] %> tweets
+    </div>
+  </div>
+</div>
+<div class="stats-counter">
+  <div>
+    <div><%= user["friends_count"] %></div>
+    <a href="https://twitter.com/<%= user["screen_name"] %>/following" class="count-link">following</a>
+  </div>
+  <div>
+    <div><%= user["followers_count"] %></div>
+    <a href="https://twitter.com/<%= user["screen_name"] %>/followers" class="count-link">followers</a>
+  </div>
+  <div>
+    <div><%= user["listed_count"] %></div>
+    <a href="https://twitter.com/<%= user["screen_name"] %>/lists" class="count-link">listed</a>
+  </div>
+</div>

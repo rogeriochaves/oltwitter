@@ -24,7 +24,9 @@ class HomeController < ApplicationController
   end
 
   def new
-    puts "tweeted #{params[:tweet]}"
+    twitter.update(params[:tweet])
+    puts "Tweeted #{params[:tweet]}"
+    Rails.cache.delete("timeline_#{session[:auth]["info"]["id"]}")
 
     redirect_to "/"
   end

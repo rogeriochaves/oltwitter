@@ -12,12 +12,6 @@
 
 const qs = x => document.querySelector(x);
 
-qs(".new-tweet").addEventListener("input", e => {
-  const tweet = e.target.value;
-
-  qs(".character-count").textContent = `${140 - tweet.length}`;
-});
-
 const evaluateScripts = html => {
   const scripts = html.matchAll(/<script.*?>([\s\S]+?)<\/script>/gm);
   for (const match of scripts) {
@@ -25,18 +19,28 @@ const evaluateScripts = html => {
   }
 };
 
-qs(".load-more").addEventListener("click", _ => {
-  qs(".load-more").innerText = "loading...";
-  fetch(`/_timeline?after=${window.LAST_TWEET_ID}`)
-    .then(response => response.text())
-    .then(tweets => {
-      qs(".home-timeline").insertAdjacentHTML("beforeend", tweets);
-      evaluateScripts(tweets);
-    })
-    .finally(() => {
-      qs(".load-more").innerText = "more";
-    });
-});
+if (qs(".new-tweet")) {
+  qs(".new-tweet").addEventListener("input", e => {
+    const tweet = e.target.value;
+
+    qs(".character-count").textContent = `${140 - tweet.length}`;
+  });
+}
+
+if (qs(".load-more")) {
+  qs(".load-more").addEventListener("click", _ => {
+    qs(".load-more").innerText = "loading...";
+    fetch(`/_timeline?after=${window.LAST_TWEET_ID}`)
+      .then(response => response.text())
+      .then(tweets => {
+        qs(".home-timeline").insertAdjacentHTML("beforeend", tweets);
+        evaluateScripts(tweets);
+      })
+      .finally(() => {
+        qs(".load-more").innerText = "more";
+      });
+  });
+}
 
 if (qs(".home-timeline")) {
   let newTweets = null;

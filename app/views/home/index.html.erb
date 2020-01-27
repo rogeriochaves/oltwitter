@@ -12,8 +12,13 @@
   <% end %>
 
   <h2>Home</h2>
-  <hr />
-  <%= render partial: "timeline" %>
+  <div class="new-tweets-notice" style="display: none">
+    0 new tweets
+  </div>
+  <div class="home-timeline">
+    <%= render partial: "timeline" %>
+  </div>
+  <button class="load-more">more</button>
 </main>
 
 <aside class="sidebar">

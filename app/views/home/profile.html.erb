@@ -3,7 +3,6 @@
     <%= image_tag @user.profile_image_url_https(:bigger).to_s, height: 64, width: 64 %>
     <h1><%= @user.name %></h1>
   </div>
-  <hr />
   <div class="profile-timeline">
     <%= render partial: "timeline" %>
   </div>

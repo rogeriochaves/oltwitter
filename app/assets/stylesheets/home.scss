@@ -219,3 +219,25 @@ a {
     padding: 16px 0;
   }
 }
+
+button.load-more {
+  width: 100%;
+  font-weight: bold;
+  padding: 8px 0;
+  height: auto;
+  margin-top: 16px;
+
+  &:hover {
+    padding: 9px 0 7px 0;
+  }
+}
+
+.new-tweets-notice {
+  padding: 8px;
+  text-align: center;
+  background: #f2ffff;
+  margin: 8px 0;
+  border-radius: 5px;
+  border: 1px solid #73d5ff;
+  cursor: pointer;
+}

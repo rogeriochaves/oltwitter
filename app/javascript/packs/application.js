@@ -10,8 +10,57 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-document.querySelector(".new-tweet").addEventListener("input", e => {
+const qs = x => document.querySelector(x);
+
+qs(".new-tweet").addEventListener("input", e => {
   const tweet = e.target.value;
 
-  document.querySelector(".character-count").textContent = 140 - tweet.length;
+  qs(".character-count").textContent = `${140 - tweet.length}`;
 });
+
+const evaluateScripts = html => {
+  const scripts = html.matchAll(/<script.*?>([\s\S]+?)<\/script>/gm);
+  for (const match of scripts) {
+    if (match[1]) eval(match[1]);
+  }
+};
+
+qs(".load-more").addEventListener("click", _ => {
+  qs(".load-more").innerText = "loading...";
+  fetch(`/_timeline?after=${window.LAST_TWEET_ID}`)
+    .then(response => response.text())
+    .then(tweets => {
+      qs(".home-timeline").insertAdjacentHTML("beforeend", tweets);
+      evaluateScripts(tweets);
+    })
+    .finally(() => {
+      qs(".load-more").innerText = "more";
+    });
+});
+
+if (qs(".home-timeline")) {
+  let newTweets = null;
+
+  window.fetchNewTweets = () => {
+    fetch(`/_timeline?before=${window.FIRST_TWEET_ID}`)
+      .then(response => response.text())
+      .then(tweets => {
+        const tweetsCount = tweets.match(new RegExp('div class="tweet"', "g"))
+          .length;
+        if (tweetsCount <= 0) return;
+
+        newTweets = tweets;
+        qs(".new-tweets-notice").style.display = "block";
+        qs(".new-tweets-notice").innerText = `${tweetsCount} new tweets`;
+        evaluateScripts(tweets);
+      });
+  };
+
+  setInterval(window.fetchNewTweets, 1000 * 60 * 3);
+
+  qs(".new-tweets-notice").addEventListener("click", _ => {
+    qs(".home-timeline").insertAdjacentHTML("afterbegin", newTweets);
+    newTweets = null;
+    qs(".new-tweets-notice").style.display = "none";
+  });
+}

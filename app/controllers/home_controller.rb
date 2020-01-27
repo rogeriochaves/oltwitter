@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   before_action :authenticate
 
   def index
-    @tweets = Rails.cache.fetch("timeline_#{session[:auth]["info"]["id"]}", expires_in: 2.minutes) do
+    @tweets = Rails.cache.fetch("timeline_#{session[:auth]["info"]["id"]}", expires_in: 3.minutes) do
       puts "Fetching timeline..."
       twitter.home_timeline(tweet_mode: "extended", count: 50)
     end
@@ -17,7 +17,7 @@ class HomeController < ApplicationController
       twitter.user(params[:screen_name])
     end
     puts "user #{@user.inspect}"
-    @tweets = Rails.cache.fetch("timeline_profile_#{params[:screen_name]}", expires_in: 2.minutes) do
+    @tweets = Rails.cache.fetch("timeline_profile_#{params[:screen_name]}", expires_in: 3.minutes) do
       puts "Fetching profile timeline..."
       twitter.user_timeline(params[:screen_name], tweet_mode: "extended", count: 50)
     end
@@ -29,6 +29,22 @@ class HomeController < ApplicationController
     Rails.cache.delete("timeline_#{session[:auth]["info"]["id"]}")
 
     redirect_to "/"
+  end
+
+  def _timeline
+    if params[:after]
+      puts "Fetching olders tweets..."
+      @tweets = Rails.cache.fetch("timeline_after_#{params[:after]}", expires_in: 1.hour) do
+        @tweets = twitter.home_timeline(tweet_mode: "extended", count: 50, max_id: params[:after].to_i)
+        @tweets = @tweets[1..]
+      end
+    elsif params[:before]
+      puts "Fetching newer tweets..."
+      @tweets = twitter.home_timeline(tweet_mode: "extended", count: 50, since_id: params[:before].to_i)
+      @tweets = @tweets[0..-2]
+    end
+
+    render layout: false
   end
 
   private

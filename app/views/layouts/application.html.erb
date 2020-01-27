@@ -21,5 +21,14 @@
     </div>
 
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157021369-1"></script>
+    <script>
+      window['ga-disable-UA-36020159-2'] = window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1";
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-157021369-1');
+    </script>
   </body>
 </html>

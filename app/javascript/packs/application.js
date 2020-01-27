@@ -56,7 +56,6 @@ if (qs(".home-timeline")) {
         newTweets = tweets;
         qs(".new-tweets-notice").style.display = "block";
         qs(".new-tweets-notice").innerText = `${tweetsCount} new tweets`;
-        evaluateScripts(tweets);
       });
   };
 
@@ -64,6 +63,8 @@ if (qs(".home-timeline")) {
 
   qs(".new-tweets-notice").addEventListener("click", _ => {
     qs(".home-timeline").insertAdjacentHTML("afterbegin", newTweets);
+    evaluateScripts(newTweets);
+
     newTweets = null;
     qs(".new-tweets-notice").style.display = "none";
   });

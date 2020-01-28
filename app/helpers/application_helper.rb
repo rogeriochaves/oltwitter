@@ -14,7 +14,7 @@ module ApplicationHelper
       quoted = "\n\nRT @#{tweet["quoted_status"]["user"]["screen_name"]} #{tweet["quoted_status"]["full_text"]}"
       text = text.gsub(tweet["quoted_status_permalink"]["url"], "") + quoted
     end
-    if tweet["in_reply_to_screen_name"]
+    if tweet["in_reply_to_screen_name"] and not text.includes? tweet["in_reply_to_screen_name"]
       text = "@#{tweet["in_reply_to_screen_name"]} " + text
     end
 

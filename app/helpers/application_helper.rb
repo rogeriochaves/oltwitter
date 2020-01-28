@@ -14,6 +14,9 @@ module ApplicationHelper
       quoted = "\n\nRT @#{tweet["quoted_status"]["user"]["screen_name"]} #{tweet["quoted_status"]["full_text"]}"
       text = text.gsub(tweet["quoted_status_permalink"]["url"], "") + quoted
     end
+    if tweet["in_reply_to_screen_name"]
+      text = "@#{tweet["in_reply_to_screen_name"]} " + text
+    end
 
     return text
   end
@@ -29,6 +32,7 @@ module ApplicationHelper
     (tweet["entities"]["hashtags"] or []).each do |hashtag|
       text = text.gsub("##{hashtag["text"]}", "<a href='https://twitter.com/hashtag/#{hashtag["text"]}' target='_blank'>##{hashtag["text"]}</a>").html_safe
     end
+    text = text.gsub(/@([^\s]+)/, '<a href="/\1">@\1</a>').html_safe
     return text
   end
 

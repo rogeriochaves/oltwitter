@@ -20,11 +20,25 @@ const evaluateScripts = html => {
 };
 
 if (qs(".new-tweet")) {
+  let inReplyTo = null;
+
   qs(".new-tweet").addEventListener("input", e => {
     const tweet = e.target.value;
 
     qs(".character-count").textContent = `${140 - tweet.length}`;
+
+    if (inReplyTo && tweet.indexOf(inReplyTo) < 0) {
+      qs("input[name=in_reply_to]").value = "";
+      inReplyTo = null;
+    }
   });
+
+  window.replyTo = function(tweetId, screenName) {
+    qs("input[name=in_reply_to]").value = tweetId;
+    qs(".new-tweet").value = `@${screenName} `;
+    qs(".new-tweet").focus();
+    inReplyTo = screenName;
+  };
 }
 
 if (qs(".load-more")) {

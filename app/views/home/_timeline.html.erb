@@ -17,13 +17,17 @@
             in reply to <%= tweet.in_reply_to_screen_name %>
           </a>
         <% end %>
-
+        <% if allow_replies %>
+          <span class="actions">
+            <a href="#" onClick="replyTo('<%= tweet.id %>', '<%= tweet.user.screen_name %>'); return false"><div class="icon icon-reply"></div> Reply</a>
+          </span>
+        <% end %>
       </div>
     </div>
   </div>
 <% end %>
 
-<% if @tweets.length > 0 %>
+<% unless @tweets.empty? %>
   <script>
     if (!window.FIRST_TWEET_ID || <%= @tweets.first.id %> > window.FIRST_TWEET_ID) {
       window.FIRST_TWEET_ID = <%= @tweets.first.id %>;

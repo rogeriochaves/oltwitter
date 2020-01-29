@@ -6,6 +6,7 @@
     </div>
 
     <textarea autofocus name="tweet" class="new-tweet" contentEditable="true"></textarea>
+    <input type="hidden" name="in_reply_to" value="" />
     <div class="tweet-button-area">
       <input type="submit" value="Tweet" />
     </div>
@@ -16,7 +17,7 @@
     0 new tweets
   </div>
   <div class="home-timeline">
-    <%= render partial: "timeline" %>
+    <%= render partial: "timeline", locals: { allow_replies: true } %>
   </div>
   <button class="load-more">more</button>
 </main>

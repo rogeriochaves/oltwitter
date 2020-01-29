@@ -115,6 +115,8 @@ hr {
   }
   .tweet-text {
     padding-top: 2px;
+    max-width: 506px;
+    word-wrap: break-word;
   }
   .author {
     font-weight: bold;
@@ -128,6 +130,27 @@ hr {
       color: #999;
     }
   }
+  .actions {
+    display: none;
+    a {
+      color: #1385b2;
+    }
+  }
+  &:hover .actions {
+    display: inline-block;
+  }
+}
+
+.icon {
+  background: image-url("sprite-icons.png");
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+  margin-top: -4px;
+}
+.icon-reply {
+  background-position: -16px 0;
 }
 
 a {
@@ -249,4 +272,11 @@ button.load-more {
   border-radius: 5px;
   border: 1px solid #73d5ff;
   cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  padding: 16px 0;
+  font-size: 12px;
+  font-family: "Lucida Grande", sans-serif;
 }

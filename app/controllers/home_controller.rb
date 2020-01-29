@@ -24,8 +24,13 @@ class HomeController < ApplicationController
   end
 
   def new
-    twitter.update(params[:tweet])
-    puts "Tweeted #{params[:tweet]}"
+    if params[:in_reply_to].empty?
+      twitter.update(params[:tweet])
+      puts "Tweeted #{params[:tweet]}"
+    else
+      twitter.update(params[:tweet], { in_reply_to_status_id: params[:in_reply_to] })
+      puts "Tweeted #{params[:tweet]} in reply to #{params[:in_reply_to]}"
+    end
     Rails.cache.delete("timeline_#{session[:auth]["info"]["id"]}")
 
     redirect_to "/"

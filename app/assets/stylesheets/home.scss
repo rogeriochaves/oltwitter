@@ -1,282 +1,137 @@
-// Place all the styles related to the Home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
-
-* {
-  box-sizing: border-box;
-}
-
 body {
-  background: #9de4e7;
-  font-family: "Lucida Grande", sans-serif;
-  color: #384498;
-  line-height: 1.2em;
-  font-size: 14px;
+  padding: 0;
+}
+.home-header-background {
+  background: #59b image-url("twitter-sun.gif") no-repeat 50% 0;
+}
+.home-wrapper {
+  width: 960px;
+  margin: 0 auto;
+  position: relative;
+}
+#searchform_q {
+  background: #fff;
   margin: 0;
+  width: 226px;
+  margin: 0;
+  padding: 6px 6px;
+  border: 1px solid #eee;
+  border-radius: 0;
+  border-right-width: 1px;
+  border-right-width: 0;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font: 13px "Lucida Grande", Arial, Sans-serif;
+}
+
+#searchform_submit {
+  height: auto;
+  background: #bbb;
+  margin: 0;
+  padding: 6px 12px;
+  border: 1px solid #eee;
+  outline-width: 0;
+  border-radius: 0;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font: 13px "Lucida Grande", Arial, Sans-serif;
+  font-style: normal;
+  font-style: normal;
+  color: #333;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.round-left {
+  border-radius: 0;
+  border-radius: 0 0 5px 5px;
+}
+
+.round-right {
+  border-radius: 0;
+  border-radius: 5px 5px 0 0;
+}
+
+.login-overlay {
+  position: absolute;
+  z-index: 20;
+  right: 0;
+  top: 80px;
+  width: 240px;
+  background: #fff;
   padding: 10px;
+  border-radius: 12px;
 }
 
-h1,
-h2 {
-  margin: 0;
-  font-size: 20px;
-  font-weight: normal;
-  padding-bottom: 8px;
-  font-family: Helvetica, sans-serif;
+.newuser {
+  background: #ddeef6;
+  padding: 0 10px 5px;
+  border-radius: 5px;
+  color: #456;
 }
 
-h2 {
-  font-size: 18px;
-  padding-bottom: 0;
+.newuser h2 {
+  font: bold 18px "Helvetica Neue", Arial, Sans-serif;
+  color: #333;
+  padding: 10px 0 4px;
 }
 
-.logo {
-  margin-bottom: 8px;
+#signup-btn a {
+  background: #fa2;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 238, 102, 1) 0%,
+    rgba(255, 170, 34, 1) 100%
+  );
+  display: block;
+  padding: 8px 10px;
+  border: 1px solid #fa2;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  color: #333;
+  text-shadow: 0 1px 0 #fe6;
+  font: bold 16px Arial, Sans-serif;
 }
 
-.good-ol {
-  padding-left: 16px;
-}
-
-.title-character-count-area {
-  display: flex;
-  justify-content: space-between;
-}
-
-.character-count {
-  font-size: 24px;
-  font-weight: bold;
-  color: #cccccc;
-  align-self: flex-end;
-  padding-bottom: 4px;
-  font-family: Helvetica, sans-serif;
-}
-
-.wrapper {
-  width: 762px;
+#trends {
+  position: relative;
+  width: 960px;
   margin: 0 auto;
 }
 
-.columns {
-  display: flex;
+#trends .inner {
+  width: 720px;
+  overflow: hidden;
+  position: relative;
 }
 
-.content {
-  background: #ffffff;
-  flex-grow: 1;
-  border-right: 1px solid #cbaedb;
-  border-radius: 5px 0 0 5px;
-  padding: 18px;
-}
-
-.new-tweet {
-  border-radius: 5px;
-  border: 1px solid #aaaaaa;
-  resize: none;
-  width: 100%;
-  padding: 8px;
-  height: 44px;
-}
-
-button,
-input[type="submit"] {
-  border: 1px solid #999999;
-  background: linear-gradient(180deg, #fff 0%, #ececec 100%);
-  height: 26px;
-  padding: 0 15px;
-  color: #666;
-  border-radius: 5px;
-  font-size: 15px;
-  cursor: pointer;
-
-  &:hover {
-    background: linear-gradient(180deg, #ececec 100%, #fff 0%);
-    padding-top: 1px;
-  }
-}
-
-.tweet-button-area {
-  display: flex;
-  justify-content: flex-end;
-  padding-top: 8px;
-  padding-bottom: 12px;
-}
-
-hr {
-  border: none;
-  border-bottom: 1px solid #eeeeee;
-}
-
-.tweet {
-  display: flex;
-
-  img {
-    margin-right: 8px;
-  }
-  .tweet-text {
-    padding-top: 2px;
-    max-width: 506px;
-    word-wrap: break-word;
-  }
-  .author {
-    font-weight: bold;
-  }
-  .tweet-timestamp {
-    color: #999;
-    font-size: 11px;
-    padding-top: 4px;
-
-    a {
-      color: #999;
-    }
-  }
-  .actions {
-    display: none;
-    a {
-      color: #1385b2;
-    }
-  }
-  &:hover .actions {
-    display: inline-block;
-  }
-}
-
-.icon {
-  background: image-url("sprite-icons.png");
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-  vertical-align: middle;
-  margin-top: -4px;
-}
-.icon-reply {
-  background-position: -16px 0;
-}
-
-a {
-  color: #1385b2;
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-.sidebar {
-  min-width: 200px;
-  background: #d2f9fa;
-  border-radius: 0 5px 5px 0;
-  font-size: 12px;
-}
-
-.profile {
-  display: flex;
-  padding: 8px 14px 12px 14px;
-
-  img {
-    margin-right: 8px;
-  }
-  a.profile-name {
-    font-weight: bold;
-    color: #384498;
-    font-size: 14px;
-  }
-  .tweet-count {
-    font-size: 11px;
-  }
-}
-
-.stats-counter {
-  padding: 0 14px;
-  display: flex;
-  font-size: 16px;
-  div {
-    padding-right: 6px;
-  }
-  .count-link {
-    font-size: 11px;
-  }
-}
-
-.sidebar-menu {
+#trends ul {
   list-style: none;
-  padding: 0;
-  font-size: 13px;
-
-  .selected {
-    background: #e2ffff;
-    a {
-      color: #384498;
-    }
-  }
-  a {
-    display: block;
-    padding: 8px 14px;
-  }
+  white-space: nowrap;
 }
 
-.arrow-up {
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid #fff;
-  margin-left: 31px;
+#trends li {
+  display: inline;
 }
 
-.profile-header {
-  display: flex;
-  align-items: center;
-
-  img {
-    margin-right: 8px;
-  }
-  h1 {
-    font-size: 32px;
-    line-height: 1.2em;
-    padding: 0;
-  }
+#trends li.trend-label {
+  font-size: 9px;
+  color: #def;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  padding: 8px 4px;
 }
 
-.profile-timeline .tweet {
-  img {
-    display: none;
-  }
-  .author {
-    display: none;
-  }
-
-  &:first-of-type .tweet-text {
-    font-size: 24px;
-    line-height: 1.2em;
-    padding: 16px 0;
-  }
+#trends a {
+  display: inline-block;
+  color: #6ac;
+  padding: 8px 4px;
 }
 
-button.load-more {
-  width: 100%;
-  font-weight: bold;
-  padding: 8px 0;
-  height: auto;
-  margin-top: 16px;
-
-  &:hover {
-    padding: 9px 0 7px 0;
-  }
+.home-header {
+  background: #246;
 }
 
-.new-tweets-notice {
-  padding: 8px;
-  text-align: center;
-  background: #f2ffff;
-  margin: 8px 0;
-  border-radius: 5px;
-  border: 1px solid #73d5ff;
-  cursor: pointer;
-}
-
-footer {
-  text-align: center;
-  padding: 16px 0;
-  font-size: 12px;
-  font-family: "Lucida Grande", sans-serif;
+.fade {
+  position: absolute;
 }

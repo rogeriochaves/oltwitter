@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   rescue_from Twitter::Error::BadRequest, with: :try_reauth
   rescue_from Twitter::Error::Unauthorized, with: :try_reauth
-  before_action :authenticate, except: :index
+  before_action :authenticate, except: [:index, :error_test]
 
   def index
     if session[:auth]
@@ -95,6 +95,10 @@ class HomeController < ApplicationController
     render layout: false
   end
 
+  def error_test
+    raise "this will be reported"
+  end
+
   private
   def authenticate
     unless session[:auth]
@@ -118,9 +122,5 @@ class HomeController < ApplicationController
     if exception.to_s == "Bad Authentication data." or exception.to_s == "Could not authenticate you."
       redirect_to '/auth/twitter'
     end
-  end
-
-  def error_test
-    throw "this will be reported"
   end
 end

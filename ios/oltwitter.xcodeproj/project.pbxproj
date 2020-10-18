@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		90418C63253C314000D5806E /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90418C5A253C313300D5806E /* SwifteriOS.framework */; };
 		90418C64253C314000D5806E /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 90418C5A253C313300D5806E /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		90418C6A253C383300D5806E /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90418C69253C383300D5806E /* AppState.swift */; };
 		90D03A1E253C2F670074D0E4 /* oltwitterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D03A1D253C2F670074D0E4 /* oltwitterApp.swift */; };
 		90D03A20253C2F670074D0E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D03A1F253C2F670074D0E4 /* ContentView.swift */; };
 		90D03A22253C2F6A0074D0E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90D03A21253C2F6A0074D0E4 /* Assets.xcassets */; };
@@ -121,6 +122,7 @@
 /* Begin PBXFileReference section */
 		90418C3A253C312800D5806E /* Swifter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifter.xcodeproj; path = "Swifter-master/Swifter.xcodeproj"; sourceTree = "<group>"; };
 		90418C51253C313300D5806E /* Swifter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifter.xcodeproj; path = "Swifter-master/Swifter.xcodeproj"; sourceTree = "<group>"; };
+		90418C69253C383300D5806E /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		90D03A1A253C2F670074D0E4 /* oltwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = oltwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D03A1D253C2F670074D0E4 /* oltwitterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = oltwitterApp.swift; sourceTree = "<group>"; };
 		90D03A1F253C2F670074D0E4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 		90D03A1C253C2F670074D0E4 /* oltwitter */ = {
 			isa = PBXGroup;
 			children = (
+				90418C69253C383300D5806E /* AppState.swift */,
 				90D03A1D253C2F670074D0E4 /* oltwitterApp.swift */,
 				90D03A1F253C2F670074D0E4 /* ContentView.swift */,
 				90D03A21253C2F6A0074D0E4 /* Assets.xcassets */,
@@ -466,6 +469,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90418C6A253C383300D5806E /* AppState.swift in Sources */,
 				90D03A20253C2F670074D0E4 /* ContentView.swift in Sources */,
 				90D03A1E253C2F670074D0E4 /* oltwitterApp.swift in Sources */,
 			);

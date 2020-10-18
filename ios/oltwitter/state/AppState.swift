@@ -8,36 +8,15 @@
 import SwiftUI
 import SwifteriOS
 
-struct AuthUser : Codable {
-    var twitterKey: String
-    var twitterSecret : String
-    var screenName : String
-    var userId : String
-}
-
-func readAuthUser(key: String) -> AuthUser? {
-    if let data = UserDefaults.standard.object(forKey: key) as? Data {
-        return try? JSONDecoder().decode(AuthUser.self, from: data)
-    }
-    return nil
-}
-
-func saveAuthUser(key: String, authUser: AuthUser?) {
-    if let newValue = authUser {
-        if let encoded = try? JSONEncoder().encode(newValue) {
-            UserDefaults.standard.set(encoded, forKey: key)
-        }
-    } else {
-        UserDefaults.standard.set(nil, forKey: key)
-    }
-}
-
 class AppState: ObservableObject {
     @Published var authUser : AuthUser?
     @Published var authError : String?
+    @Published var timeline : ServerData<JSON> = .notAsked
+    var imageLoader : ImageLoader
 
     init() {
         self.authUser = readAuthUser(key: "authUser")
+        self.imageLoader = ImageLoader()
     }
 
     func login() {
@@ -93,12 +72,39 @@ class AppState: ObservableObject {
     }
 
     func fetchTweets() {
+        self.timeline = .loading
         if let client = getClient() {
             client.getHomeTimeline(count: 50, success: { json in
                 print("json", json)
+                self.timeline = .success(json)
             }, failure: { error in
                 print("error", error.localizedDescription)
+                self.timeline = .error(error.localizedDescription)
             })
         }
+    }
+}
+
+struct AuthUser : Codable {
+    var twitterKey: String
+    var twitterSecret : String
+    var screenName : String
+    var userId : String
+}
+
+func readAuthUser(key: String) -> AuthUser? {
+    if let data = UserDefaults.standard.object(forKey: key) as? Data {
+        return try? JSONDecoder().decode(AuthUser.self, from: data)
+    }
+    return nil
+}
+
+func saveAuthUser(key: String, authUser: AuthUser?) {
+    if let newValue = authUser {
+        if let encoded = try? JSONEncoder().encode(newValue) {
+            UserDefaults.standard.set(encoded, forKey: key)
+        }
+    } else {
+        UserDefaults.standard.set(nil, forKey: key)
     }
 }

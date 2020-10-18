@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwifteriOS
 
 // From: https://stackoverflow.com/a/30593673/996404
 extension Collection {
@@ -13,6 +14,13 @@ extension Collection {
     subscript (safe index: Index) -> Element? {
         return indices.contains(index) ? self[index] : nil
     }
+}
+
+enum ServerData<T> {
+    case notAsked
+    case loading
+    case success(T)
+    case error(String)
 }
 
 class Utils {
@@ -38,5 +46,18 @@ class Utils {
             }
         }
         return nil
+    }
+
+    static func timelineSample() -> JSON {
+        let path = Bundle.main.path(forResource: "timeline", ofType: "json")!
+        let data = try! Data(contentsOf: URL(fileURLWithPath: path))
+
+        return JSON(data)
+    }
+
+    static func debug(_ str: String) {
+        if ProcessInfo.processInfo.environment["DEBUG_SWIFT"] != nil {
+            print(str)
+        }
     }
 }

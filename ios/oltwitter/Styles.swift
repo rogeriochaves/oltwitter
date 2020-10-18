@@ -13,4 +13,9 @@ class Styles {
         green: 0.6,
         blue: 0.6
     )
+    static var linkBlue = Color(
+        red: 33 / 255,
+        green: 110 / 255,
+        blue: 150 / 255
+    )
 }

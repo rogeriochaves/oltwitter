@@ -72,10 +72,11 @@ class AppState: ObservableObject {
     }
 
     func fetchTweets() {
-        self.timeline = .loading
+        if case .notAsked = self.timeline {
+            self.timeline = .loading
+        }
         if let client = getClient() {
             client.getHomeTimeline(count: 50, success: { json in
-                print("json", json)
                 self.timeline = .success(json)
             }, failure: { error in
                 print("error", error.localizedDescription)

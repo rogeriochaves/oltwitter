@@ -119,4 +119,8 @@ class HomeController < ApplicationController
       redirect_to '/auth/twitter'
     end
   end
+
+  def error_test
+    throw "this will be reported"
+  end
 end

@@ -109,4 +109,8 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  Raven.configure do |config|
+    config.dsn = 'https://cd84d3220dd94731a11483bfd9124cc9@o378045.ingest.sentry.io/5468114'
+  end
 end

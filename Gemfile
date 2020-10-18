@@ -56,3 +56,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'twitter'
 gem 'omniauth-twitter'
 gem "sentry-raven"
+gem 'dotenv-rails', groups: [:development, :test]

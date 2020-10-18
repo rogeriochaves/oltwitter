@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		902248CC253C478100C79A52 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902248CB253C478100C79A52 /* TimelineView.swift */; };
+		902248DA253C67D800C79A52 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902248D9253C67D800C79A52 /* Utils.swift */; };
+		902248DE253C682D00C79A52 /* .env in Resources */ = {isa = PBXBuildFile; fileRef = 902248DD253C682D00C79A52 /* .env */; };
+		902248E2253C685F00C79A52 /* .env in Resources */ = {isa = PBXBuildFile; fileRef = 902248E1253C685F00C79A52 /* .env */; };
+		902248EB253C6F1600C79A52 /* timeline.json in Resources */ = {isa = PBXBuildFile; fileRef = 902248EA253C6F1600C79A52 /* timeline.json */; };
 		90418C63253C314000D5806E /* SwifteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90418C5A253C313300D5806E /* SwifteriOS.framework */; };
 		90418C64253C314000D5806E /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 90418C5A253C313300D5806E /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		90418C6A253C383300D5806E /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90418C69253C383300D5806E /* AppState.swift */; };
@@ -120,6 +125,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		902248CB253C478100C79A52 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
+		902248D9253C67D800C79A52 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		902248DD253C682D00C79A52 /* .env */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .env; path = ../.env; sourceTree = "<group>"; };
+		902248E1253C685F00C79A52 /* .env */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .env; path = ../../.env; sourceTree = "<group>"; };
+		902248EA253C6F1600C79A52 /* timeline.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = timeline.json; sourceTree = "<group>"; };
 		90418C3A253C312800D5806E /* Swifter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifter.xcodeproj; path = "Swifter-master/Swifter.xcodeproj"; sourceTree = "<group>"; };
 		90418C51253C313300D5806E /* Swifter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifter.xcodeproj; path = "Swifter-master/Swifter.xcodeproj"; sourceTree = "<group>"; };
 		90418C69253C383300D5806E /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -163,9 +173,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		902248E9253C6F0300C79A52 /* fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				902248EA253C6F1600C79A52 /* timeline.json */,
+			);
+			path = fixtures;
+			sourceTree = "<group>";
+		};
 		90418C34253C305B00D5806E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				902248DD253C682D00C79A52 /* .env */,
 				90418C3A253C312800D5806E /* Swifter.xcodeproj */,
 			);
 			name = Frameworks;
@@ -220,9 +239,13 @@
 		90D03A1C253C2F670074D0E4 /* oltwitter */ = {
 			isa = PBXGroup;
 			children = (
+				902248E1253C685F00C79A52 /* .env */,
 				90418C69253C383300D5806E /* AppState.swift */,
 				90D03A1D253C2F670074D0E4 /* oltwitterApp.swift */,
 				90D03A1F253C2F670074D0E4 /* ContentView.swift */,
+				902248CB253C478100C79A52 /* TimelineView.swift */,
+				902248D9253C67D800C79A52 /* Utils.swift */,
+				902248E9253C6F0300C79A52 /* fixtures */,
 				90D03A21253C2F6A0074D0E4 /* Assets.xcassets */,
 				90D03A26253C2F6A0074D0E4 /* Info.plist */,
 				90D03A23253C2F6A0074D0E4 /* Preview Content */,
@@ -443,8 +466,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				902248DE253C682D00C79A52 /* .env in Resources */,
 				90D03A25253C2F6A0074D0E4 /* Preview Assets.xcassets in Resources */,
 				90D03A22253C2F6A0074D0E4 /* Assets.xcassets in Resources */,
+				902248E2253C685F00C79A52 /* .env in Resources */,
+				902248EB253C6F1600C79A52 /* timeline.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,9 +495,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				902248DA253C67D800C79A52 /* Utils.swift in Sources */,
 				90418C6A253C383300D5806E /* AppState.swift in Sources */,
 				90D03A20253C2F670074D0E4 /* ContentView.swift in Sources */,
 				90D03A1E253C2F670074D0E4 /* oltwitterApp.swift in Sources */,
+				902248CC253C478100C79A52 /* TimelineView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

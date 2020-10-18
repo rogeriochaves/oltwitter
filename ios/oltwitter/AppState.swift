@@ -28,15 +28,40 @@ func saveAuthUser(key: String, authUser: AuthUser?) {
             UserDefaults.standard.set(encoded, forKey: key)
         }
     } else {
-        UserDefaults.standard.setNilValueForKey(key)
+        UserDefaults.standard.set(nil, forKey: key)
     }
 }
 
 class AppState: ObservableObject {
     @Published var authUser : AuthUser?
+    @Published var authError : String?
 
     init() {
         self.authUser = readAuthUser(key: "authUser")
+    }
+
+    func login() {
+        let swifter = Swifter(
+            consumerKey: Utils.envVar("TWITTER_CONSUMER_KEY")!,
+            consumerSecret: Utils.envVar("TWITTER_CONSUMER_SECRET")!
+        )
+
+        swifter.authorize(
+            withCallback: URL(string: "oltwitter://")!,
+            presentingFrom: nil,
+            success: { accessToken, response in
+                if let access = accessToken {
+                    self.saveLogin(accessToken: access)
+                } else {
+                    print("error", response)
+                    self.authError = response.debugDescription
+                }
+            },
+            failure: { error in
+                print("error", error)
+                self.authError = error.localizedDescription
+            }
+        )
     }
 
     func saveLogin(accessToken: Credential.OAuthAccessToken) {
@@ -53,5 +78,27 @@ class AppState: ObservableObject {
     func logout() {
         saveAuthUser(key: "authUser", authUser: nil)
         self.authUser = nil
+    }
+
+    func getClient() -> Swifter? {
+        if let user = authUser {
+            return Swifter(
+                consumerKey: Utils.envVar("TWITTER_CONSUMER_KEY")!,
+                consumerSecret: Utils.envVar("TWITTER_CONSUMER_SECRET")!,
+                oauthToken: user.twitterKey,
+                oauthTokenSecret: user.twitterSecret
+            )
+        }
+        return nil
+    }
+
+    func fetchTweets() {
+        if let client = getClient() {
+            client.getHomeTimeline(count: 50, success: { json in
+                print("json", json)
+            }, failure: { error in
+                print("error", error.localizedDescription)
+            })
+        }
     }
 }

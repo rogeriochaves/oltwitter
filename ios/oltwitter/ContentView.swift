@@ -6,10 +6,23 @@
 //
 
 import SwiftUI
+import SwifteriOS
 
 struct ContentView: View {
     func signIn() {
+        let swifter = Swifter(consumerKey: "", consumerSecret: "")
 
+        swifter.authorize(
+            withCallback: URL(string: "oltwitter://")!,
+            presentingFrom: nil,
+            success: { accessToken, response  in
+                print("accessToken", accessToken)
+                print("response", response)
+            },
+            failure: { error in
+                print("error", error)
+            }
+        )
     }
 
     var body: some View {

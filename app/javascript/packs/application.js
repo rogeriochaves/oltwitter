@@ -60,8 +60,21 @@ if (qs(".home-timeline")) {
   let newTweets = null;
   let tweetsCount = 0;
 
+  let isTabRecentlyActive = true;
+  let tabActiveCheckTimeout;
+  window.onfocus = function () {
+    isTabRecentlyActive = true;
+    clearTimeout(tabActiveCheckTimeout);
+  };
+  window.onblur = function () {
+    let half_hour = 1000 * 60 * 30;
+    tabActiveCheckTimeout = setTimeout(() => {
+      isTabRecentlyActive = false;
+    }, half_hour);
+  };
+
   window.fetchNewTweets = () => {
-    if (tweetsCount > 45) return;
+    if (tweetsCount > 45 || !isTabRecentlyActive) return;
     fetch(`/_timeline?before=${window.FIRST_TWEET_ID}`)
       .then((response) => response.text())
       .then((tweets) => {
@@ -78,7 +91,8 @@ if (qs(".home-timeline")) {
       });
   };
 
-  setInterval(window.fetchNewTweets, 1000 * 60 * 3);
+  const three_minutes = 1000 * 60 * 3;
+  setInterval(window.fetchNewTweets, three_minutes);
 
   qs(".new-tweets-notice").addEventListener("click", (_) => {
     if (tweetsCount > 45) {

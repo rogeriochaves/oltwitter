@@ -10,9 +10,9 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-const qs = x => document.querySelector(x);
+const qs = (x) => document.querySelector(x);
 
-const evaluateScripts = html => {
+const evaluateScripts = (html) => {
   const scripts = html.matchAll(/<script.*?>([\s\S]+?)<\/script>/gm);
   for (const match of scripts) {
     if (match[1]) eval(match[1]);
@@ -22,7 +22,7 @@ const evaluateScripts = html => {
 if (qs(".new-tweet")) {
   let inReplyTo = null;
 
-  qs(".new-tweet").addEventListener("input", e => {
+  qs(".new-tweet").addEventListener("input", (e) => {
     const tweet = e.target.value;
 
     qs(".character-count").textContent = `${140 - tweet.length}`;
@@ -33,7 +33,7 @@ if (qs(".new-tweet")) {
     }
   });
 
-  window.replyTo = function(tweetId, screenName) {
+  window.replyTo = function (tweetId, screenName) {
     qs("input[name=in_reply_to]").value = tweetId;
     qs(".new-tweet").value = `@${screenName} `;
     qs(".new-tweet").focus();
@@ -42,11 +42,11 @@ if (qs(".new-tweet")) {
 }
 
 if (qs(".load-more")) {
-  qs(".load-more").addEventListener("click", _ => {
+  qs(".load-more").addEventListener("click", (_) => {
     qs(".load-more").innerText = "loading...";
     fetch(`/_timeline?after=${window.LAST_TWEET_ID}`)
-      .then(response => response.text())
-      .then(tweets => {
+      .then((response) => response.text())
+      .then((tweets) => {
         qs(".home-timeline").insertAdjacentHTML("beforeend", tweets);
         evaluateScripts(tweets);
       })
@@ -61,9 +61,10 @@ if (qs(".home-timeline")) {
   let tweetsCount = 0;
 
   window.fetchNewTweets = () => {
+    if (tweetsCount > 45) return;
     fetch(`/_timeline?before=${window.FIRST_TWEET_ID}`)
-      .then(response => response.text())
-      .then(tweets => {
+      .then((response) => response.text())
+      .then((tweets) => {
         tweetsCount = tweets.match(new RegExp('div class="tweet"', "g")).length;
         if (tweetsCount <= 0) return;
 
@@ -79,7 +80,7 @@ if (qs(".home-timeline")) {
 
   setInterval(window.fetchNewTweets, 1000 * 60 * 3);
 
-  qs(".new-tweets-notice").addEventListener("click", _ => {
+  qs(".new-tweets-notice").addEventListener("click", (_) => {
     if (tweetsCount > 45) {
       window.location.reload();
       return;

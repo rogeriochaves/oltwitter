@@ -94,7 +94,7 @@ struct TweetView: View {
 struct TweetView_Previews: PreviewProvider {
     static var previews: some View {
         let state = AppState()
-        let tweet = Utils.timelineSample()[1]
+        let tweet = Utils.timelineSample()[2]
 
         return TweetView(tweet)
             .environmentObject(state)

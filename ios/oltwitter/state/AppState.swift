@@ -76,7 +76,7 @@ class AppState: ObservableObject {
             self.timeline = .loading
         }
         if let client = getClient() {
-            client.getHomeTimeline(count: 50, success: { json in
+            client.getHomeTimeline(count: 50, tweetMode: .extended, success: { json in
                 self.timeline = .success(json)
             }, failure: { error in
                 print("error", error.localizedDescription)

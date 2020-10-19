@@ -5,9 +5,12 @@
 //  Base: https://gist.github.com/mjm/0581781f85db45b05e8e2c5c33696f88
 //
 
+import UIKit
 import SwiftUI
 import SwifteriOS
+import SafariServices
 
+private let tcoDetector = try! NSRegularExpression(pattern: "(https://t.co/[A-Z0-9-_]+)", options: .caseInsensitive)
 private let mentionsDetector = try! NSRegularExpression(pattern: "(\\s|^)@([A-Z0-9-_]+)", options: .caseInsensitive)
 private let hashtagsDetector = try! NSRegularExpression(pattern: "(\\s|^)#([A-Z0-9-_]+)", options: .caseInsensitive)
 
@@ -55,7 +58,8 @@ struct LinkColoredText: View {
 }
 
 enum LinkedType {
-    case httpLink(URL)
+    case browserLink(URL)
+    case embededLink(URL)
     case mentionLink
     case hashtagLink
 }
@@ -93,6 +97,13 @@ struct LinkedText: View {
 
         links = mentionsDetector.matches(in: displayText, options: [], range: wholeString).map { (.mentionLink, $0) }
         links += hashtagsDetector.matches(in: displayText, options: [], range: wholeString).map { (.hashtagLink, $0) }
+        links += tcoDetector.matches(in: displayText, options: [], range: wholeString).compactMap {
+            let result = nsText.substring(with: $0.range)
+            if let url = URL(string: result) {
+                return (LinkedType.browserLink(url), $0)
+            }
+            return nil
+        }
 
         for url in urls {
             if let displayUrl = url["display_url"].string,
@@ -101,7 +112,7 @@ struct LinkedText: View {
 
                 do {
                     let re = try NSRegularExpression(pattern: NSRegularExpression.escapedPattern(for: displayUrl))
-                    links += re.matches(in: displayText, options: [], range: wholeString).map { (.httpLink(expandedUrl_), $0) }
+                    links += re.matches(in: displayText, options: [], range: wholeString).map { (.browserLink(expandedUrl_), $0) }
                 } catch {
                     // ignore
                 }
@@ -114,7 +125,7 @@ struct LinkedText: View {
 
                 do {
                     let re = try NSRegularExpression(pattern: NSRegularExpression.escapedPattern(for: displayUrl))
-                    links += re.matches(in: displayText, options: [], range: wholeString).map { (.httpLink(expandedUrl_), $0) }
+                    links += re.matches(in: displayText, options: [], range: wholeString).map { (.embededLink(expandedUrl_), $0) }
                 } catch {
                     // ignore
                 }
@@ -190,7 +201,8 @@ private struct LinkTapOverlay: UIViewRepresentable {
         }
 
         enum LinkedUrl {
-            case web(URL)
+            case browser(URL)
+            case embeded(URL)
         }
 
         func getUrl(_ location: CGPoint) -> LinkedUrl? {
@@ -198,12 +210,14 @@ private struct LinkTapOverlay: UIViewRepresentable {
                 let stringMatch = textStorage?.attributedSubstring(from: result.range).string.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: " ", with: "") ?? ""
 
                 switch type {
-                case let .httpLink(url_):
-                    return .web(url_)
+                case let .browserLink(url_):
+                    return .browser(url_)
+                case let .embededLink(url_):
+                    return .embeded(url_)
                 case .mentionLink:
-                    return .web(URL(string: "https://twitter.com/" + stringMatch.replacingOccurrences(of: "@", with: ""))!)
+                    return .browser(URL(string: "https://twitter.com/" + stringMatch.replacingOccurrences(of: "@", with: ""))!)
                 case .hashtagLink:
-                    return .web(URL(string: "https://twitter.com/hashtag/" + stringMatch.replacingOccurrences(of: "#", with: ""))!)
+                    return .browser(URL(string: "https://twitter.com/hashtag/" + stringMatch.replacingOccurrences(of: "#", with: ""))!)
                 }
             }
 
@@ -215,8 +229,11 @@ private struct LinkTapOverlay: UIViewRepresentable {
             guard let url = getUrl(location) else { return }
 
             switch url {
-            case .web(let url_):
+            case .browser(let url_):
                 UIApplication.shared.open(url_, options: [:], completionHandler: nil)
+            case .embeded(let url_):
+                let embededBrowser = SFSafariViewController(url: url_)
+                UIApplication.topViewController?.present(embededBrowser, animated: true)
             }
         }
 
@@ -224,7 +241,7 @@ private struct LinkTapOverlay: UIViewRepresentable {
             let location = gesture.location(in: gesture.view!)
             guard let url = getUrl(location) else { return }
 
-            if case let .web(url_) = url {
+            if case let .browser(url_) = url {
                 UIApplication.share(url_)
             }
         }
@@ -233,7 +250,7 @@ private struct LinkTapOverlay: UIViewRepresentable {
             let location = gesture.location(in: gesture.view!)
             guard let url = getUrl(location) else { return }
 
-            if case let .web(url_) = url {
+            if case let .browser(url_) = url {
                 UIApplication.share(url_)
             }
         }

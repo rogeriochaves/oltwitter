@@ -11,7 +11,11 @@ import SwifteriOS
 class AppState: ObservableObject {
     @Published var authUser : AuthUser?
     @Published var authError : String?
-    @Published var timeline : ServerData<JSON> = .notAsked
+    @Published var timeline : ServerData<[JSON]> = .notAsked
+    @Published var newTweets : ServerData<[JSON]> = .notAsked
+    @Published var moreTweets : ServerData<[JSON]> = .notAsked
+    var firstTweetId : Int? = nil
+    var lastTweetId : Int? = nil
     var imageLoader : ImageLoader
 
     init() {
@@ -71,17 +75,76 @@ class AppState: ObservableObject {
         return nil
     }
 
-    func fetchTweets() {
-        if case .notAsked = self.timeline {
+    // TODO offsets
+    func initialTimelineFetch() {
+        if case .notAsked = self.timeline, let client = getClient() {
             self.timeline = .loading
-        }
-        if let client = getClient() {
+
             client.getHomeTimeline(count: 50, tweetMode: .extended, success: { json in
-                self.timeline = .success(json)
+                if let timeline = json.array {
+                    self.timeline = .success(timeline)
+                    self.firstTweetId = timeline.first?["id"].integer
+                    self.lastTweetId = timeline.last?["id"].integer
+                } else {
+                    self.timeline = .error("Error parsing API data")
+                }
             }, failure: { error in
                 print("error", error.localizedDescription)
                 self.timeline = .error(error.localizedDescription)
             })
+        } else if case .loading = self.timeline {
+            // nothing
+        }
+    }
+
+    func fetchNewTweets() {
+        if let client = getClient(),
+           let firstTweetId = self.firstTweetId {
+            client.getHomeTimeline(count: 50, sinceID: String(firstTweetId), tweetMode: .extended, success: { json in
+                if let newTweets = json.array {
+                    self.newTweets = .success(newTweets)
+                    if newTweets.count > 0 {
+                        self.firstTweetId = newTweets.first?["id"].integer
+                    }
+                } else {
+                    self.newTweets = .error("Error parsing API data")
+                }
+            }, failure: { error in
+                print("error", error.localizedDescription)
+                self.newTweets = .error(error.localizedDescription)
+            })
+        }
+    }
+
+    func fetchMoreTweets() {
+        if let client = getClient(),
+           case let .success(timeline) = self.timeline,
+           let lastTweetId = self.lastTweetId {
+            self.moreTweets = .loading
+            client.getHomeTimeline(count: 50, maxID: String(lastTweetId), tweetMode: .extended, success: { json in
+                if let moreTweets = json.array {
+                    self.moreTweets = .notAsked
+                    if moreTweets.count > 0 {
+                        self.timeline = .success(timeline + moreTweets)
+                        self.lastTweetId = moreTweets.last?["id"].integer
+                    } else {
+                        self.moreTweets = .error("No more tweets")
+                    }
+                } else {
+                    self.moreTweets = .error("Error parsing API data")
+                }
+            }, failure: { error in
+                print("error", error.localizedDescription)
+                self.moreTweets = .error(error.localizedDescription)
+            })
+        }
+    }
+
+    func showNewTweets() {
+        if case let .success(newTweets) = self.newTweets,
+           case let .success(timeline) = self.timeline {
+            self.timeline = .success(newTweets + timeline)
+            self.newTweets = .notAsked
         }
     }
 }

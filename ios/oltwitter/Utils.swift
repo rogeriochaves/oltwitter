@@ -48,11 +48,11 @@ class Utils {
         return nil
     }
 
-    static func timelineSample() -> JSON {
+    static func timelineSample() -> [JSON] {
         let path = Bundle.main.path(forResource: "timeline", ofType: "json")!
         let data = try! Data(contentsOf: URL(fileURLWithPath: path))
 
-        return JSON(data)
+        return JSON(data).array!
     }
 
     static func debug(_ str: String) {

@@ -146,7 +146,7 @@ struct LinkedText: View {
     var body: some View {
         ZStack {
             LinkColoredText(text: text, links: links)
-                .font(.body) // enforce here because the link tapping won't be right if it's different
+                .font(.system(size: Styles.tweetFontSize))
                 .overlay(LinkTapOverlay(text: text, links: links, changeRoute: changeRoute))
 
             NavigationLink(destination: destination, isActive: $isLinkActive) {
@@ -180,7 +180,7 @@ private struct LinkTapOverlay: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: LinkTapOverlayView, context: UIViewRepresentableContext<LinkTapOverlay>) {
-        let attributedString = NSAttributedString(string: text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body)])
+        let attributedString = NSAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: Styles.tweetFontSize)])
         context.coordinator.textStorage = NSTextStorage(attributedString: attributedString)
         context.coordinator.textStorage!.addLayoutManager(context.coordinator.layoutManager)
     }

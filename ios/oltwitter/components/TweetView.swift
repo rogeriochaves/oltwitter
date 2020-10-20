@@ -88,6 +88,7 @@ struct TweetView: View {
             }.padding(.horizontal, 10)
             Divider()
         }.padding(.top, 10)
+        .font(.system(size: Styles.tweetFontSize))
     }
 }
 

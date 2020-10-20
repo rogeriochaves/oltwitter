@@ -10,16 +10,25 @@ import SwifteriOS
 
 @main
 struct oltwitterApp: App {
-    @StateObject private var appState = AppState()
+    @Environment(\.scenePhase) var scenePhase
+    @StateObject private var state = AppState()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(appState)
+                .environmentObject(state)
                 .onOpenURL { (url) in
                     let callbackUrl = URL(string: "oltwitter://")!
                     Swifter.handleOpenURL(url, callbackURL: callbackUrl)
                 }
+                .onChange(of: scenePhase, perform: { value in
+                    switch scenePhase {
+                    case .background:
+                        state.fetchNewTweets()
+                    default:
+                        break
+                    }
+                })
         }
     }
 }

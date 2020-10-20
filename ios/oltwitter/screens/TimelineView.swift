@@ -49,12 +49,12 @@ struct TimelineView: View {
     func moreButton(action: @escaping () -> Void, label: String) -> some View {
         Button(action: action, label: {
             Text(label)
+            .frame(height: 40, alignment: .center)
+            .frame(maxWidth: .infinity)
+            .foregroundColor(Styles.blueText)
+            .background(Styles.lightestBlue)
+            .border(Styles.lightBlue)
         })
-        .frame(height: 40, alignment: .center)
-        .frame(maxWidth: .infinity)
-        .foregroundColor(Styles.blueText)
-        .background(Styles.lightestBlue)
-        .border(Styles.lightBlue)
         .padding(.horizontal, 10)
         .padding(.vertical, 10)
     }

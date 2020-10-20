@@ -68,7 +68,7 @@ typealias LinkedResult = (LinkedType, NSTextCheckingResult)
 
 struct LinkedText: View {
     let text: String
-    var links: [LinkedResult]
+    let links: [LinkedResult]
     @State var isLinkActive: Bool = false
     @State var destination : AnyView = AnyView(EmptyView())
 
@@ -95,7 +95,8 @@ struct LinkedText: View {
         let nsText = displayText as NSString
         let wholeString = NSRange(location: 0, length: nsText.length)
 
-        links = mentionsDetector.matches(in: displayText, options: [], range: wholeString).map { (.mentionLink, $0) }
+        var links: [LinkedResult] = []
+        links += mentionsDetector.matches(in: displayText, options: [], range: wholeString).map { (.mentionLink, $0) }
         links += hashtagsDetector.matches(in: displayText, options: [], range: wholeString).map { (.hashtagLink, $0) }
         links += tcoDetector.matches(in: displayText, options: [], range: wholeString).compactMap {
             let result = nsText.substring(with: $0.range)
@@ -131,6 +132,10 @@ struct LinkedText: View {
                 }
             }
         }
+        links = links.sorted(by: { (a, b) -> Bool in
+            a.1.range.lowerBound < b.1.range.lowerBound
+        })
+        self.links = links
     }
 
     func changeRoute(view: AnyView) {

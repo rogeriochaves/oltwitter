@@ -100,7 +100,7 @@ class AppState: ObservableObject {
     func fetchNewTweets() {
         if let client = getClient(),
            let firstTweetId = self.firstTweetId {
-            client.getHomeTimeline(count: 50, sinceID: String(firstTweetId), tweetMode: .extended, success: { json in
+            client.getHomeTimeline(count: 50, sinceID: String(firstTweetId - 1), tweetMode: .extended, success: { json in
                 if let newTweets = json.array {
                     self.newTweets = .success(newTweets)
                     if newTweets.count > 0 {
@@ -125,7 +125,7 @@ class AppState: ObservableObject {
                 if let moreTweets = json.array {
                     self.moreTweets = .notAsked
                     if moreTweets.count > 0 {
-                        self.timeline = .success(timeline + moreTweets)
+                        self.timeline = .success(timeline + moreTweets.dropFirst())
                         self.lastTweetId = moreTweets.last?["id"].integer
                     } else {
                         self.moreTweets = .error("No more tweets")

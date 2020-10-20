@@ -41,6 +41,8 @@ struct TimelineView: View {
             return AnyView(
                 moreButton(action: {}, label: "loading...")
             )
+        case .error(let err):
+            return AnyView(Text(err))
         default:
             return AnyView(EmptyView())
         }

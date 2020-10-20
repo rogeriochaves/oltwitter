@@ -100,8 +100,11 @@ class AppState: ObservableObject {
     func fetchNewTweets() {
         if let client = getClient(),
            let firstTweetId = self.firstTweetId {
-            client.getHomeTimeline(count: 50, sinceID: String(firstTweetId - 1), tweetMode: .extended, success: { json in
-                if let newTweets = json.array {
+            client.getHomeTimeline(count: 50, sinceID: String(firstTweetId), tweetMode: .extended, success: { json in
+                if var newTweets = json.array {
+                    newTweets = newTweets.filter { tweet in
+                        tweet["id"].integer != self.firstTweetId
+                    }
                     self.newTweets = .success(newTweets)
                     if newTweets.count > 0 {
                         self.firstTweetId = newTweets.first?["id"].integer
@@ -122,10 +125,13 @@ class AppState: ObservableObject {
            let lastTweetId = self.lastTweetId {
             self.moreTweets = .loading
             client.getHomeTimeline(count: 50, maxID: String(lastTweetId), tweetMode: .extended, success: { json in
-                if let moreTweets = json.array {
+                if var moreTweets = json.array {
+                    moreTweets = moreTweets.filter { tweet in
+                        tweet["id"].integer != self.lastTweetId
+                    }
                     self.moreTweets = .notAsked
                     if moreTweets.count > 0 {
-                        self.timeline = .success(timeline + moreTweets.dropFirst())
+                        self.timeline = .success(timeline + moreTweets)
                         self.lastTweetId = moreTweets.last?["id"].integer
                     } else {
                         self.moreTweets = .error("No more tweets")
@@ -135,7 +141,11 @@ class AppState: ObservableObject {
                 }
             }, failure: { error in
                 print("error", error.localizedDescription)
-                self.moreTweets = .error(error.localizedDescription)
+                if error.localizedDescription.contains("Too Many Requests") {
+                    self.moreTweets = .error("Too Many Requests")
+                } else {
+                    self.moreTweets = .error(error.localizedDescription)
+                }
             })
         }
     }

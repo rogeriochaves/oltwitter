@@ -42,7 +42,10 @@ struct TimelineView: View {
                 moreButton(action: {}, label: "loading...")
             )
         case .error(let err):
-            return AnyView(Text(err))
+            return AnyView(VStack {
+                Text(err)
+                moreButton(action: state.fetchMoreTweets, label: "more")
+            })
         default:
             return AnyView(EmptyView())
         }

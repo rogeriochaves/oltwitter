@@ -67,8 +67,9 @@ struct TweetView: View {
             text = "@\(inReplyTo) " + text_
         }
 
-        text = text?.replacingOccurrences(of: "\n", with: "<br>")
-        text = text?.decodeHTMLEntities()
+        text = text?.replacingOccurrences(of: "&amp;", with: "&")
+        text = text?.replacingOccurrences(of: "&lt;", with: "<")
+        text = text?.replacingOccurrences(of: "&gt;", with: ">")
 
         return text ?? ""
     }

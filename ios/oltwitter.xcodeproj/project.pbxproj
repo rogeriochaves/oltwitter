@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		902248CC253C478100C79A52 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902248CB253C478100C79A52 /* TimelineView.swift */; };
+		902248CC253C478100C79A52 /* TimelineScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902248CB253C478100C79A52 /* TimelineScreen.swift */; };
 		902248DA253C67D800C79A52 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902248D9253C67D800C79A52 /* Utils.swift */; };
 		902248DE253C682D00C79A52 /* .env in Resources */ = {isa = PBXBuildFile; fileRef = 902248DD253C682D00C79A52 /* .env */; };
 		902248E2253C685F00C79A52 /* .env in Resources */ = {isa = PBXBuildFile; fileRef = 902248E1253C685F00C79A52 /* .env */; };
@@ -20,6 +20,7 @@
 		90418C64253C314000D5806E /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 90418C5A253C313300D5806E /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		90418C6A253C383300D5806E /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90418C69253C383300D5806E /* AppState.swift */; };
 		906A7C1C253CA43B0005ABC3 /* LinkedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906A7C1B253CA43B0005ABC3 /* LinkedText.swift */; };
+		90B3A1EF2540B8C300361E33 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B3A1EE2540B8C300361E33 /* LoginScreen.swift */; };
 		90D03A1E253C2F670074D0E4 /* oltwitterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D03A1D253C2F670074D0E4 /* oltwitterApp.swift */; };
 		90D03A20253C2F670074D0E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D03A1F253C2F670074D0E4 /* ContentView.swift */; };
 		90D03A22253C2F6A0074D0E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90D03A21253C2F6A0074D0E4 /* Assets.xcassets */; };
@@ -130,7 +131,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		902248CB253C478100C79A52 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
+		902248CB253C478100C79A52 /* TimelineScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineScreen.swift; sourceTree = "<group>"; };
 		902248D9253C67D800C79A52 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		902248DD253C682D00C79A52 /* .env */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .env; path = ../.env; sourceTree = "<group>"; };
 		902248E1253C685F00C79A52 /* .env */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .env; path = ../../.env; sourceTree = "<group>"; };
@@ -143,6 +144,7 @@
 		90418C51253C313300D5806E /* Swifter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifter.xcodeproj; path = "Swifter-master/Swifter.xcodeproj"; sourceTree = "<group>"; };
 		90418C69253C383300D5806E /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		906A7C1B253CA43B0005ABC3 /* LinkedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedText.swift; sourceTree = "<group>"; };
+		90B3A1EE2540B8C300361E33 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		90D03A1A253C2F670074D0E4 /* oltwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = oltwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D03A1D253C2F670074D0E4 /* oltwitterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = oltwitterApp.swift; sourceTree = "<group>"; };
 		90D03A1F253C2F670074D0E4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -246,7 +248,8 @@
 		90B3A1E1253F672E00361E33 /* screens */ = {
 			isa = PBXGroup;
 			children = (
-				902248CB253C478100C79A52 /* TimelineView.swift */,
+				902248CB253C478100C79A52 /* TimelineScreen.swift */,
+				90B3A1EE2540B8C300361E33 /* LoginScreen.swift */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -543,7 +546,8 @@
 				90D03A1E253C2F670074D0E4 /* oltwitterApp.swift in Sources */,
 				906A7C1C253CA43B0005ABC3 /* LinkedText.swift in Sources */,
 				902248F1253C737D00C79A52 /* TweetView.swift in Sources */,
-				902248CC253C478100C79A52 /* TimelineView.swift in Sources */,
+				90B3A1EF2540B8C300361E33 /* LoginScreen.swift in Sources */,
+				902248CC253C478100C79A52 /* TimelineScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

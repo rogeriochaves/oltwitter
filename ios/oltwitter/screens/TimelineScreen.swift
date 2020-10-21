@@ -13,7 +13,7 @@ struct IdentifiableJson : Identifiable {
     var value : JSON
 }
 
-struct TimelineView: View {
+struct TimelineScreen: View {
     @EnvironmentObject var state : AppState
     @State var timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
 
@@ -109,7 +109,7 @@ struct TimelineView: View {
     }
 }
 
-struct TimelineView_Previews: PreviewProvider {
+struct TimelineScreen_Previews: PreviewProvider {
     static var previews: some View {
         let state = AppState()
         state.timeline = .success(Utils.timelineSample())
@@ -119,8 +119,8 @@ struct TimelineView_Previews: PreviewProvider {
         loadingState.timeline = .loading
 
         return Group {
-            TimelineView().environmentObject(state)
-            TimelineView().environmentObject(loadingState)
+            TimelineScreen().environmentObject(state)
+            TimelineScreen().environmentObject(loadingState)
         }
     }
 }

@@ -100,15 +100,3 @@ extension Date {
         return Int64(self.timeIntervalSince1970 * 1000)
     }
 }
-
-// From: https://stackoverflow.com/a/47480859/996404
-extension String{
-    func decodeHTMLEntities() -> String{
-        let decoded = try? NSAttributedString(data: Data(utf8), options: [
-            .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
-        ], documentAttributes: nil).string
-
-        return decoded ?? self
-    }
-}

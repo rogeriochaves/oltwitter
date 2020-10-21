@@ -24,13 +24,8 @@ struct oltwitterApp: App {
                 }
                 .onChange(of: scenePhase, perform: { value in
                     switch scenePhase {
-                    case .active:
-                        let now = Date().currentTimeMillis()
-                        let threeMinutes: Int64 = 1000 * 60 * 3;
-                        if lastFetch > now - threeMinutes {
-                            state.fetchNewTweets()
-                            self.lastFetch = now
-                        }
+                    case .background:
+                        state.fetchNewTweets()
                     default:
                         break
                     }

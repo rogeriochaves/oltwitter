@@ -17,6 +17,7 @@ class AppState: ObservableObject {
     var firstTweetId : Int? = nil
     var lastTweetId : Int? = nil
     var imageLoader : ImageLoader
+    var lastFetch = Date().currentTimeMillis()
 
     init() {
         self.authUser = readAuthUser(key: "authUser")
@@ -102,8 +103,15 @@ class AppState: ObservableObject {
     }
 
     func fetchNewTweets() {
+        let now = Date().currentTimeMillis()
+        let threeMinutes: Int64 = 1000 * 60 * 1;
+        if now - lastFetch < threeMinutes {
+            return
+        }
+
         if let client = getClient(),
            let firstTweetId = self.firstTweetId {
+            self.lastFetch = now
             client.getHomeTimeline(count: 50, sinceID: String(firstTweetId), tweetMode: .extended, success: { json in
                 if var newTweets = json.array {
                     newTweets = newTweets.filter { tweet in

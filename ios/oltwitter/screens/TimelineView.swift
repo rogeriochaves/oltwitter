@@ -15,7 +15,7 @@ struct IdentifiableJson : Identifiable {
 
 struct TimelineView: View {
     @EnvironmentObject var state : AppState
-    @State var timer = Timer.publish(every: 3 * 60, on: .main, in: .common).autoconnect()
+    @State var timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
 
     func newTweetsButton() -> some View {
         switch state.newTweets {

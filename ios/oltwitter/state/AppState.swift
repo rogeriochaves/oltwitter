@@ -75,12 +75,18 @@ class AppState: ObservableObject {
         return nil
     }
 
-    // TODO offsets
-    func initialTimelineFetch() {
-        if case .notAsked = self.timeline, let client = getClient() {
+    func initialTimelineFetch(force : Bool = false) {
+        if case .loading = self.timeline {
+            return
+        }
+        if case .notAsked = self.timeline {
             self.timeline = .loading
-
+        } else if (!force) {
+            return
+        }
+        if let client = getClient() {
             client.getHomeTimeline(count: 50, tweetMode: .extended, success: { json in
+                self.newTweets = .notAsked
                 if let timeline = json.array {
                     self.timeline = .success(timeline)
                     self.firstTweetId = timeline.first?["id"].integer
@@ -92,8 +98,6 @@ class AppState: ObservableObject {
                 print("error", error.localizedDescription)
                 self.timeline = .error(error.localizedDescription)
             })
-        } else if case .loading = self.timeline {
-            // nothing
         }
     }
 
@@ -109,17 +113,18 @@ class AppState: ObservableObject {
                     if newTweets.count > 0 {
                         self.firstTweetId = newTweets.first?["id"].integer
                     }
-                } else {
-                    self.newTweets = .error("Error parsing API data")
                 }
             }, failure: { error in
                 print("error", error.localizedDescription)
-                self.newTweets = .error(error.localizedDescription)
             })
         }
     }
 
     func fetchMoreTweets() {
+        if case let .success(newTweets) = self.newTweets, newTweets.count > 45 {
+            return
+        }
+
         if let client = getClient(),
            case let .success(timeline) = self.timeline,
            let lastTweetId = self.lastTweetId {
@@ -153,8 +158,13 @@ class AppState: ObservableObject {
     func showNewTweets() {
         if case let .success(newTweets) = self.newTweets,
            case let .success(timeline) = self.timeline {
-            self.timeline = .success(newTweets + timeline)
-            self.newTweets = .notAsked
+            if newTweets.count > 45 {
+                self.newTweets = .loading
+                initialTimelineFetch(force: true)
+            } else {
+                self.timeline = .success(newTweets + timeline)
+                self.newTweets = .notAsked
+            }
         }
     }
 }

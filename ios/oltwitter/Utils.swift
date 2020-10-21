@@ -94,3 +94,9 @@ extension UIApplication {
         _share(data, applicationActivities: applicationActivities)
     }
 }
+
+extension Date {
+    func currentTimeMillis() -> Int64 {
+        return Int64(self.timeIntervalSince1970 * 1000)
+    }
+}

@@ -20,12 +20,20 @@ struct TimelineView: View {
     func newTweetsButton() -> some View {
         switch state.newTweets {
         case let .success(newTweets):
-            if newTweets.count > 0 {
+            if newTweets.count > 45 {
+                return AnyView(
+                    moreButton(action: state.showNewTweets, label: "50+ new tweets")
+                )
+            } else if newTweets.count > 0 {
                 return AnyView(
                     moreButton(action: state.showNewTweets, label: "\(newTweets.count) new tweets")
                 )
             }
             return AnyView(EmptyView())
+        case .loading:
+            return AnyView(
+                moreButton(action: {}, label: "loading...")
+            )
         default:
             return AnyView(EmptyView())
         }

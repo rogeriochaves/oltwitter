@@ -21,6 +21,9 @@
 		90418C6A253C383300D5806E /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90418C69253C383300D5806E /* AppState.swift */; };
 		906A7C1C253CA43B0005ABC3 /* LinkedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906A7C1B253CA43B0005ABC3 /* LinkedText.swift */; };
 		90B3A1EF2540B8C300361E33 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B3A1EE2540B8C300361E33 /* LoginScreen.swift */; };
+		90B3A1F52540C32300361E33 /* AccountScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B3A1F42540C32300361E33 /* AccountScreen.swift */; };
+		90B3A1F92540CADA00361E33 /* userTimeline.json in Resources */ = {isa = PBXBuildFile; fileRef = 90B3A1F82540CADA00361E33 /* userTimeline.json */; };
+		90B3A1FF2540CEA400361E33 /* user.json in Resources */ = {isa = PBXBuildFile; fileRef = 90B3A1FE2540CEA400361E33 /* user.json */; };
 		90D03A1E253C2F670074D0E4 /* oltwitterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D03A1D253C2F670074D0E4 /* oltwitterApp.swift */; };
 		90D03A20253C2F670074D0E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D03A1F253C2F670074D0E4 /* ContentView.swift */; };
 		90D03A22253C2F6A0074D0E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90D03A21253C2F6A0074D0E4 /* Assets.xcassets */; };
@@ -145,6 +148,9 @@
 		90418C69253C383300D5806E /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		906A7C1B253CA43B0005ABC3 /* LinkedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedText.swift; sourceTree = "<group>"; };
 		90B3A1EE2540B8C300361E33 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		90B3A1F42540C32300361E33 /* AccountScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScreen.swift; sourceTree = "<group>"; };
+		90B3A1F82540CADA00361E33 /* userTimeline.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = userTimeline.json; sourceTree = "<group>"; };
+		90B3A1FE2540CEA400361E33 /* user.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = user.json; sourceTree = "<group>"; };
 		90D03A1A253C2F670074D0E4 /* oltwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = oltwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D03A1D253C2F670074D0E4 /* oltwitterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = oltwitterApp.swift; sourceTree = "<group>"; };
 		90D03A1F253C2F670074D0E4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -189,6 +195,8 @@
 			isa = PBXGroup;
 			children = (
 				902248EA253C6F1600C79A52 /* timeline.json */,
+				90B3A1F82540CADA00361E33 /* userTimeline.json */,
+				90B3A1FE2540CEA400361E33 /* user.json */,
 			);
 			path = fixtures;
 			sourceTree = "<group>";
@@ -250,6 +258,7 @@
 			children = (
 				902248CB253C478100C79A52 /* TimelineScreen.swift */,
 				90B3A1EE2540B8C300361E33 /* LoginScreen.swift */,
+				90B3A1F42540C32300361E33 /* AccountScreen.swift */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -508,9 +517,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90B3A1FF2540CEA400361E33 /* user.json in Resources */,
 				902248DE253C682D00C79A52 /* .env in Resources */,
 				90D03A25253C2F6A0074D0E4 /* Preview Assets.xcassets in Resources */,
 				90D03A22253C2F6A0074D0E4 /* Assets.xcassets in Resources */,
+				90B3A1F92540CADA00361E33 /* userTimeline.json in Resources */,
 				902248E2253C685F00C79A52 /* .env in Resources */,
 				902248EB253C6F1600C79A52 /* timeline.json in Resources */,
 			);
@@ -540,6 +551,7 @@
 				902248DA253C67D800C79A52 /* Utils.swift in Sources */,
 				902248F7253C77D900C79A52 /* Styles.swift in Sources */,
 				90418C6A253C383300D5806E /* AppState.swift in Sources */,
+				90B3A1F52540C32300361E33 /* AccountScreen.swift in Sources */,
 				90D03A20253C2F670074D0E4 /* ContentView.swift in Sources */,
 				902248FE253C7AA100C79A52 /* AsyncImage.swift in Sources */,
 				90224905253C7B1600C79A52 /* ImageLoader.swift in Sources */,

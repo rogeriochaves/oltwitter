@@ -1,0 +1,142 @@
+{
+  "contributors_enabled" : false,
+  "profile_text_color" : "000000",
+  "profile_use_background_image" : true,
+  "is_translation_enabled" : false,
+  "suspended" : false,
+  "translator_type" : "none",
+  "profile_link_color" : "877120",
+  "utc_offset" : null,
+  "friends_count" : 389.0,
+  "default_profile" : false,
+  "profile_image_url" : "http://pbs.twimg.com/profile_images/1815202221/just_me3_normal.jpg",
+  "name" : "Rogério Chaves",
+  "needs_phone_verification" : false,
+  "description" : "dev @ https://t.co/fk1NcLyb5u | https://t.co/mhbUXrtlGg",
+  "id" : 77572670.0,
+  "time_zone" : null,
+  "has_extended_profile" : false,
+  "listed_count" : 26.0,
+  "followers_count" : 544.0,
+  "lang" : null,
+  "status" : {
+    "in_reply_to_user_id" : 50638811.0,
+    "in_reply_to_screen_name" : "AnaPaulaGomess",
+    "favorited" : false,
+    "truncated" : false,
+    "retweeted" : false,
+    "in_reply_to_user_id_str" : "50638811",
+    "coordinates" : null,
+    "source" : "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "id_str" : "1317452886935293952",
+    "favorite_count" : 1.0,
+    "in_reply_to_status_id_str" : "1317409291586985984",
+    "text" : "@AnaPaulaGomess Fala o nome que o Twitter da ideias :D\n\nExemplo: https://t.co/TWU59zBJwe",
+    "retweet_count" : 0.0,
+    "quoted_status_id_str" : "1316428555476107264",
+    "id" : 1.317452886935294e+18,
+    "geo" : null,
+    "created_at" : "Sat Oct 17 13:10:19 +0000 2020",
+    "place" : null,
+    "contributors" : null,
+    "entities" : {
+      "urls" : [
+        {
+          "expanded_url" : "https://twitter.com/GantLaborde/status/1316428555476107264",
+          "display_url" : "twitter.com/GantLaborde/st…",
+          "indices" : [
+            65.0,
+            88.0
+          ],
+          "url" : "https://t.co/TWU59zBJwe"
+        }
+      ],
+      "user_mentions" : [
+        {
+          "id_str" : "50638811",
+          "indices" : [
+            0.0,
+            15.0
+          ],
+          "screen_name" : "AnaPaulaGomess",
+          "name" : "Ana Paula Gomes",
+          "id" : 50638811.0
+        }
+      ],
+      "hashtags" : [
+
+      ],
+      "symbols" : [
+
+      ]
+    },
+    "is_quote_status" : true,
+    "in_reply_to_status_id" : 1.317409291586986e+18,
+    "quoted_status_id" : 1.3164285554761073e+18,
+    "lang" : "pt",
+    "possibly_sensitive" : false
+  },
+  "statuses_count" : 6890.0,
+  "geo_enabled" : true,
+  "entities" : {
+    "description" : {
+      "urls" : [
+        {
+          "expanded_url" : "http://Booking.com",
+          "indices" : [
+            6.0,
+            29.0
+          ],
+          "display_url" : "Booking.com",
+          "url" : "https://t.co/fk1NcLyb5u"
+        },
+        {
+          "display_url" : "github.com/rogeriochaves",
+          "indices" : [
+            32.0,
+            55.0
+          ],
+          "expanded_url" : "https://github.com/rogeriochaves",
+          "url" : "https://t.co/mhbUXrtlGg"
+        }
+      ]
+    }
+  },
+  "profile_background_tile" : true,
+  "id_str" : "77572670",
+  "profile_background_color" : "000000",
+  "verified" : false,
+  "profile_sidebar_fill_color" : "FFFFFF",
+  "profile_sidebar_border_color" : "F7F6F2",
+  "created_at" : "Sat Sep 26 20:52:59 +0000 2009",
+  "profile_banner_url" : "https://pbs.twimg.com/profile_banners/77572670/1398707102",
+  "default_profile_image" : false,
+  "protected" : false,
+  "profile_background_image_url_https" : "https://abs.twimg.com/images/themes/theme13/bg.gif",
+  "notifications" : false,
+  "follow_request_sent" : false,
+  "location" : "Amsterdam, The Netherlands",
+  "is_translator" : false,
+  "favourites_count" : 6234.0,
+  "profile_location" : {
+    "country_code" : "",
+    "contained_within" : [
+
+    ],
+    "url" : "https://api.twitter.com/1.1/geo/id/99cdab25eddd6bce.json",
+    "place_type" : "unknown",
+    "bounding_box" : null,
+    "country" : "",
+    "attributes" : {
+
+    },
+    "full_name" : "Amsterdam, The Netherlands",
+    "id" : "99cdab25eddd6bce",
+    "name" : "Amsterdam, The Netherlands"
+  },
+  "following" : false,
+  "profile_background_image_url" : "http://abs.twimg.com/images/themes/theme13/bg.gif",
+  "url" : null,
+  "screen_name" : "_rchaves_",
+  "profile_image_url_https" : "https://pbs.twimg.com/profile_images/1815202221/just_me3_normal.jpg"
+}

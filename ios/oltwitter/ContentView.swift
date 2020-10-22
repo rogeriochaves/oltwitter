@@ -14,6 +14,7 @@ struct ContentView: View {
     init() {
         UITabBar.appearance().backgroundColor = UIColor.label
         UITabBar.appearance().barTintColor = UIColor.label
+        UINavigationBar.appearance().barTintColor = UIColor(red: 68 / 255, green: 150 / 255, blue: 208 / 255, alpha: 1)
     }
 
     var body: some View {
@@ -22,17 +23,21 @@ struct ContentView: View {
                 LoginScreen()
             } else {
                 TabView {
-                    TimelineScreen()
-                        .tabItem {
-                            Image(systemName: "house.fill")
-                            Text("Home")
-                        }
+                    NavigationView {
+                        TimelineScreen()
+                    }
+                    .tabItem {
+                        Image(systemName: "house.fill")
+                        Text("Home")
+                    }
 
-                    TimelineScreen()
-                        .tabItem {
-                            Image(systemName: "person.fill")
-                            Text("Me")
-                        }
+                    NavigationView {
+                        AccountScreen()
+                    }
+                    .tabItem {
+                        Image(systemName: "person.fill")
+                        Text("Me")
+                    }
                 }.accentColor(Styles.lightBlue)
             }
         }

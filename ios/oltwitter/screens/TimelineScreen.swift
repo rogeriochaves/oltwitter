@@ -100,7 +100,19 @@ struct TimelineScreen: View {
             case .notAsked:
                 EmptyView()
             }
-        }.onAppear() {
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                HStack {
+                    Image("inset-twitter-logo")
+                        .renderingMode(.original)
+                        .resizable()
+                        .frame(width: 29, height: 24)
+                }
+            }
+        }
+        .onAppear() {
             state.initialTimelineFetch()
         }
         .onReceive(self.timer) { (_) in

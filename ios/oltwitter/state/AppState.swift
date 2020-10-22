@@ -14,6 +14,8 @@ class AppState: ObservableObject {
     @Published var timeline : ServerData<[JSON]> = .notAsked
     @Published var newTweets : ServerData<[JSON]> = .notAsked
     @Published var moreTweets : ServerData<[JSON]> = .notAsked
+    @Published var users : [String: ServerData<JSON>] = [:]
+    @Published var userTimelines : [String: ServerData<JSON>] = [:]
     var firstTweetId : Int? = nil
     var lastTweetId : Int? = nil
     var imageLoader : ImageLoader
@@ -118,9 +120,6 @@ class AppState: ObservableObject {
                         tweet["id"].integer != self.firstTweetId
                     }
                     self.newTweets = .success(newTweets)
-                    if newTweets.count > 0 {
-                        self.firstTweetId = newTweets.first?["id"].integer
-                    }
                 }
             }, failure: { error in
                 print("error", error.localizedDescription)
@@ -172,7 +171,38 @@ class AppState: ObservableObject {
             } else {
                 self.timeline = .success(newTweets + timeline)
                 self.newTweets = .notAsked
+                self.firstTweetId = newTweets.first?["id"].integer
             }
+        }
+    }
+
+    func fetchUserTimeline(screenName : String) {
+        if let client = getClient() {
+            if userTimelines[screenName] == nil {
+                userTimelines[screenName] = .loading
+            }
+            client.getTimeline(for: .screenName(screenName), tweetMode: .extended, success: { json in
+                self.userTimelines[screenName] = .success(json)
+            }, failure: { error in
+                print("error", error.localizedDescription)
+                if case .loading = self.userTimelines[screenName] {
+                    self.userTimelines[screenName] = .error(error.localizedDescription)
+                }
+            })
+        }
+    }
+
+    func fetchUser(screenName : String) {
+        if let client = getClient(), users[screenName] == nil {
+            users[screenName] = .loading
+            client.showUser(.screenName(screenName), success: { json in
+                self.users[screenName] = .success(json)
+            }, failure: { error in
+                print("error", error.localizedDescription)
+                if case .loading = self.users[screenName] {
+                    self.users[screenName] = .error(error.localizedDescription)
+                }
+            })
         }
     }
 }

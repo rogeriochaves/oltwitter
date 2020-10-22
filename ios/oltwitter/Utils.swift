@@ -55,6 +55,20 @@ class Utils {
         return JSON(data).array!
     }
 
+    static func userTimelineSample() -> JSON {
+        let path = Bundle.main.path(forResource: "userTimeline", ofType: "json")!
+        let data = try! Data(contentsOf: URL(fileURLWithPath: path))
+
+        return JSON(data)
+    }
+
+    static func userSample() -> JSON {
+        let path = Bundle.main.path(forResource: "user", ofType: "json")!
+        let data = try! Data(contentsOf: URL(fileURLWithPath: path))
+
+        return JSON(data)
+    }
+
     static func debug(_ str: String) {
         if ProcessInfo.processInfo.environment["DEBUG_SWIFT"] != nil {
             print(str)

@@ -16,6 +16,11 @@ struct IdentifiableJson : Identifiable {
 struct TimelineScreen: View {
     @EnvironmentObject var state : AppState
     @State var timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
+    private var hideTopBar : Bool
+
+    init(hideTopBar: Bool = false) {
+        self.hideTopBar = hideTopBar
+    }
 
     func newTweetsButton() -> some View {
         switch state.newTweets {
@@ -100,18 +105,17 @@ struct TimelineScreen: View {
             case .notAsked:
                 EmptyView()
             }
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                HStack {
-                    Image("inset-twitter-logo")
-                        .renderingMode(.original)
-                        .resizable()
-                        .frame(width: 29, height: 24)
+            VStack {
+                GeometryReader { geometry in
+                    Styles.lightBlue
+                        .frame(height: geometry.safeAreaInsets.top)
+                        .edgesIgnoringSafeArea(.top)
+                    Spacer()
                 }
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarHidden(hideTopBar)
         .onAppear() {
             state.initialTimelineFetch()
         }

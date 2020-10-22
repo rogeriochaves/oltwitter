@@ -23,7 +23,9 @@ class Styles {
 
     static var lightestBlue = Color(red: 242 / 255, green: 255 / 255, blue: 255 / 255)
 
-    static var lightBlue = Color(red: 115 / 255, green: 213 / 255, blue: 255 / 255)
+    static var uiLightBlue = UIColor(red: 115 / 255, green: 213 / 255, blue: 255 / 255, alpha: 1)
+
+    static var lightBlue = Color(uiLightBlue)
 
     // This will be black on dark mode
     static var white = Color(UIColor.systemBackground)

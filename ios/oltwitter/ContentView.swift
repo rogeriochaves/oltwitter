@@ -14,7 +14,8 @@ struct ContentView: View {
     init() {
         UITabBar.appearance().backgroundColor = UIColor.label
         UITabBar.appearance().barTintColor = UIColor.label
-        UINavigationBar.appearance().barTintColor = UIColor(red: 68 / 255, green: 150 / 255, blue: 208 / 255, alpha: 1)
+        UINavigationBar.appearance().tintColor = UIColor.label
+        UINavigationBar.appearance().barTintColor = Styles.uiLightBlue
     }
 
     var body: some View {
@@ -24,7 +25,7 @@ struct ContentView: View {
             } else {
                 TabView {
                     NavigationView {
-                        TimelineScreen()
+                        TimelineScreen(hideTopBar: true)
                     }
                     .tabItem {
                         Image(systemName: "house.fill")

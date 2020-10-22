@@ -89,7 +89,7 @@ struct AccountScreen: View {
                     profile(user)
                 }
                 Section {
-                    Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Button(action: state.logout, label: {
                         Text("Sign out").foregroundColor(.red)
                     })
                 }.onAppear() {
@@ -98,7 +98,7 @@ struct AccountScreen: View {
                     }
                 }
             }
-            .navigationBarTitle(user.screenName, displayMode: .inline)
+            .navigationBarTitle("Me", displayMode: .inline)
         }
     }
 }

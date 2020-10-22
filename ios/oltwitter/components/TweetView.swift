@@ -75,17 +75,22 @@ struct TweetView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading) {
+        let screenName = tweet["user"]["screen_name"].string ?? ""
+
+        return VStack(alignment: .leading) {
             HStack(alignment: .top) {
                 avatar().padding(.top, 4)
                 VStack(alignment: .leading, spacing: 0) {
-                    (
-                        Text(tweet["user"]["name"].string ?? "")
-                            .bold()
-                        +
-                        Text(" @" + (tweet["user"]["screen_name"].string ?? ""))
-                            .foregroundColor(Styles.gray)
-                    ).lineLimit(1).truncationMode(.tail)
+                    NavigationLink(destination: ProfileScreen(screenName: screenName)) {
+                        (
+                            Text(tweet["user"]["name"].string ?? "")
+                                .bold()
+                                .foregroundColor(.black)
+                            +
+                            Text(" @\(screenName)")
+                                .foregroundColor(Styles.gray)
+                        ).lineLimit(1).truncationMode(.tail)
+                    }
                     LinkedText(fullText(), tweet)
                         .padding(.top, 5)
                 }

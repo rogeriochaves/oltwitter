@@ -208,6 +208,7 @@ private struct LinkTapOverlay: UIViewRepresentable {
         enum LinkedUrl {
             case browser(URL)
             case embeded(URL)
+            case mention(String)
         }
 
         func getUrl(_ location: CGPoint) -> LinkedUrl? {
@@ -220,7 +221,7 @@ private struct LinkTapOverlay: UIViewRepresentable {
                 case let .embededLink(url_):
                     return .embeded(url_)
                 case .mentionLink:
-                    return .browser(URL(string: "https://twitter.com/" + stringMatch.replacingOccurrences(of: "@", with: ""))!)
+                    return .mention(stringMatch.replacingOccurrences(of: "@", with: ""))
                 case .hashtagLink:
                     return .browser(URL(string: "https://twitter.com/hashtag/" + stringMatch.replacingOccurrences(of: "#", with: ""))!)
                 }
@@ -239,6 +240,10 @@ private struct LinkTapOverlay: UIViewRepresentable {
             case .embeded(let url_):
                 let embededBrowser = SFSafariViewController(url: url_)
                 UIApplication.topViewController?.present(embededBrowser, animated: true)
+            case .mention(let screenName):
+                self.overlay.changeRoute(
+                    AnyView(ProfileScreen(screenName: screenName))
+                )
             }
         }
 

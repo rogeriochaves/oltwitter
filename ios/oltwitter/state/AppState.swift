@@ -15,7 +15,7 @@ class AppState: ObservableObject {
     @Published var newTweets : ServerData<[JSON]> = .notAsked
     @Published var moreTweets : ServerData<[JSON]> = .notAsked
     @Published var users : [String: ServerData<JSON>] = [:]
-    @Published var userTimelines : [String: ServerData<JSON>] = [:]
+    @Published var userTimelines : [String: ServerData<[JSON]>] = [:]
     var firstTweetId : Int? = nil
     var lastTweetId : Int? = nil
     var imageLoader : ImageLoader
@@ -84,6 +84,8 @@ class AppState: ObservableObject {
         }
         if case .notAsked = self.timeline {
             self.timeline = .loading
+        } else if case .error(_) = self.timeline {
+            self.timeline = .loading
         } else if (!force) {
             return
         }
@@ -99,7 +101,11 @@ class AppState: ObservableObject {
                 }
             }, failure: { error in
                 print("error", error.localizedDescription)
-                self.timeline = .error(error.localizedDescription)
+                if error.localizedDescription.contains("Too Many Requests") {
+                    self.timeline = .error("Twitter API Limit: Too Many Requests")
+                } else {
+                    self.timeline = .error(error.localizedDescription)
+                }
             })
         }
     }
@@ -154,7 +160,7 @@ class AppState: ObservableObject {
             }, failure: { error in
                 print("error", error.localizedDescription)
                 if error.localizedDescription.contains("Too Many Requests") {
-                    self.moreTweets = .error("Too Many Requests")
+                    self.moreTweets = .error("Twitter API Limit: Too Many Requests")
                 } else {
                     self.moreTweets = .error(error.localizedDescription)
                 }
@@ -182,7 +188,11 @@ class AppState: ObservableObject {
                 userTimelines[screenName] = .loading
             }
             client.getTimeline(for: .screenName(screenName), tweetMode: .extended, success: { json in
-                self.userTimelines[screenName] = .success(json)
+                if let timeline = json.array {
+                    self.userTimelines[screenName] = .success(timeline)
+                } else {
+                    self.userTimelines[screenName] = .error("Error parsing API data")
+                }
             }, failure: { error in
                 print("error", error.localizedDescription)
                 if case .loading = self.userTimelines[screenName] {

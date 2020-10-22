@@ -11,7 +11,9 @@ struct AccountScreen: View {
     @EnvironmentObject var state : AppState
 
     func profile(_ user: AuthUser) -> some View {
-        switch state.users[user.screenName] {
+        let screenName = user.screenName
+
+        switch state.users[screenName] {
         case .success(let user):
             if let name = user["name"].string,
                let followers = user["followers_count"].integer,
@@ -19,7 +21,7 @@ struct AccountScreen: View {
                let tweets = user["statuses_count"].integer,
                let avatarUrl = user["profile_image_url_https"].string {
                 return AnyView(Group {
-                    NavigationLink(destination: TimelineScreen()) {
+                    NavigationLink(destination: ProfileScreen(screenName: screenName)) {
                         HStack {
                             AsyncImage(url: avatarUrl, imageLoader: state.imageLoader)
                                 .aspectRatio(contentMode: .fit)

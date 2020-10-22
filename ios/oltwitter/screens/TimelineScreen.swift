@@ -107,9 +107,10 @@ struct TimelineScreen: View {
             }
             VStack {
                 GeometryReader { geometry in
-                    Styles.lightBlue
+                    Styles.white
                         .frame(height: geometry.safeAreaInsets.top)
                         .edgesIgnoringSafeArea(.top)
+                    Divider()
                     Spacer()
                 }
             }

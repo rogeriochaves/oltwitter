@@ -354,8 +354,8 @@
     "lang" : "en",
     "place" : null,
     "favorited" : false,
-    "in_reply_to_status_id_str" : null,
-    "in_reply_to_screen_name" : null,
+    "in_reply_to_status_id_str" : "1318295983210508289",
+    "in_reply_to_screen_name" : "someone",
     "created_at" : "Mon Oct 19 21:12:52 +0000 2020",
     "user" : {
       "profile_background_tile" : false,

@@ -77,7 +77,23 @@ struct TweetView: View {
     var body: some View {
         let screenName = tweet["user"]["screen_name"].string ?? ""
 
-        return VStack(alignment: .leading) {
+        return VStack(alignment: .leading, spacing: 3) {
+            if let inReplyTo = tweet["in_reply_to_screen_name"].string,
+               let inReplyToStatusId = tweet["in_reply_to_status_id_str"].string {
+                Button(action: {
+                    if let url = URL(string: "https://twitter.com/\(inReplyTo)/status/\(inReplyToStatusId)") {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "arrowshape.turn.up.left.fill")
+                        Text("in reply to @\(inReplyTo)")
+                    }
+                        .foregroundColor(Styles.gray)
+                        .padding(.trailing, 10)
+                        .padding(.leading, 40)
+                }
+            }
             HStack(alignment: .top) {
                 avatar().padding(.top, 4)
                 VStack(alignment: .leading, spacing: 0) {
@@ -94,7 +110,9 @@ struct TweetView: View {
                     LinkedText(fullText(), tweet)
                         .padding(.top, 5)
                 }
-            }.padding(.horizontal, 10)
+            }
+            .padding(.horizontal, 10)
+            .padding(.bottom, 3)
             Divider()
         }.padding(.top, 10)
         .font(.system(size: Styles.tweetFontSize))

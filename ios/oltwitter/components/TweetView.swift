@@ -89,6 +89,7 @@ struct TweetView: View {
                         Image(systemName: "arrowshape.turn.up.left.fill")
                         Text("in reply to @\(inReplyTo)")
                     }
+                        .font(.system(size: 14))
                         .foregroundColor(Styles.gray)
                         .padding(.trailing, 10)
                         .padding(.leading, 40)
@@ -114,8 +115,31 @@ struct TweetView: View {
             .padding(.horizontal, 10)
             .padding(.bottom, 3)
             Divider()
-        }.padding(.top, 10)
+        }
+        .padding(.top, 10)
         .font(.system(size: Styles.tweetFontSize))
+        .contextMenu {
+            Button(action: {
+                if let id = tweet["id_str"].string,
+                   let url = URL(string: "https://twitter.com/\(screenName)/status/\(id)") {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }, label: {
+                Text("Open tweet")
+            })
+            Button(action: {
+                if let id = tweet["id_str"].string {
+                   UIPasteboard.general.string = "https://twitter.com/\(screenName)/status/\(id)"
+                }
+            }, label: {
+                Text("Copy link")
+            })
+            Button(action: {
+                UIPasteboard.general.string = fullText()
+            }, label: {
+                Text("Copy text")
+            })
+        }
     }
 }
 

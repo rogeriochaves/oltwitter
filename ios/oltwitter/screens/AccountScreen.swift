@@ -92,9 +92,21 @@ struct AccountScreen: View {
                         profile(user)
                     }
                     Section {
-                        Button(action: state.logout, label: {
+                        Button(action: {
+                            UIApplication.shared.open(URL(string: "https://github.com/rogeriochaves/oltwitter/")!, options: [:], completionHandler: nil)
+                        }) {
+                            Text("GitHub Repo")
+                                .foregroundColor(Styles.linkBlue)
+                        }
+                        Button(action: {
+                            UIApplication.shared.open(URL(string: "https://github.com/rogeriochaves/oltwitter/issues")!, options: [:], completionHandler: nil)
+                        }) {
+                            Text("Report an Issue")
+                                .foregroundColor(Styles.linkBlue)
+                        }
+                        Button(action: state.logout) {
                             Text("Sign out").foregroundColor(.red)
-                        })
+                        }
                     }
                 }
                 .navigationBarTitle("Me", displayMode: .inline)

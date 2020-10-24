@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   rescue_from Twitter::Error::BadRequest, with: :try_reauth
   rescue_from Twitter::Error::Unauthorized, with: :try_reauth
-  before_action :authenticate, except: [:index, :error_test]
+  before_action :authenticate, except: [:index, :error_test, :privacy]
 
   def index
     if session[:auth]
@@ -52,6 +52,9 @@ class HomeController < ApplicationController
       ]
       render "home", layout: false
     end
+  end
+
+  def privacy
   end
 
   def profile

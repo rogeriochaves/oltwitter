@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/_timeline', to: 'home#_timeline'
 
   get '/error_test', to: 'home#error_test'
+  get '/privacy', to: 'home#privacy'
   get '/:screen_name', to: 'home#profile'
 
   root 'home#index'

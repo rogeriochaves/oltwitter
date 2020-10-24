@@ -113,7 +113,7 @@ struct TweetView: View {
                 }
             }
             .padding(.horizontal, 10)
-            .padding(.bottom, 5)
+            .padding(.bottom, 6)
             Divider()
         }
         .padding(.top, 10)

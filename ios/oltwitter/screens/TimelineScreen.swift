@@ -107,29 +107,44 @@ struct TimelineScreen: View {
         ZStack {
             switch state.timeline {
             case let .success(timeline):
-                ScrollView {
-                    tweets(timeline)
-                        // best I could find to read ScrollView position without affecting scroll view itself
-                        // based on https://stackoverflow.com/a/64368200/996404
-                        .background(GeometryReader { geo -> Text in
-                            let posY = geo.frame(in: .global).minY
+                ZStack(alignment: .bottomTrailing) {
+                    ScrollView {
+                        tweets(timeline)
+                            // best I could find to read ScrollView position without affecting scroll view itself
+                            // based on https://stackoverflow.com/a/64368200/996404
+                            .background(GeometryReader { geo -> Text in
+                                let posY = geo.frame(in: .global).minY
 
-                            // displays new tweets only if scroll is already on top, or user scrolled top
-                            // once when there were new tweets, so that we don't disrupt the scrolling when
-                            // new tweets come in, triggering in the user the addiction to go to the top
-                            // and check what's new constantly
-                            if posY > -110 {
-                                self.scrollPosition = .top
-                            } else if case let .success(newTweets) = self.state.newTweets,
-                                      case .top = self.scrollPosition,
-                                      newTweets.count > 0 {
-                                self.scrollPosition = .bottomWithNewTweets
-                            } else {
-                                self.scrollPosition = .bottom
-                            }
+                                // displays new tweets only if scroll is already on top, or user scrolled top
+                                // once when there were new tweets, so that we don't disrupt the scrolling when
+                                // new tweets come in, triggering in the user the addiction to go to the top
+                                // and check what's new constantly
+                                if posY > -110 {
+                                    self.scrollPosition = .top
+                                } else if case let .success(newTweets) = self.state.newTweets,
+                                          case .top = self.scrollPosition,
+                                          newTweets.count > 0 {
+                                    self.scrollPosition = .bottomWithNewTweets
+                                } else {
+                                    self.scrollPosition = .bottom
+                                }
 
-                            return Text("")
-                        })
+                                return Text("")
+                            })
+                    }
+                    NavigationLink(destination: NewTweetScreen()) {
+                        Image(systemName: "square.and.pencil")
+                            .resizable()
+                            .frame(width: 32, height: 32)
+                            .foregroundColor(Color(red: 1, green: 1, blue: 1))
+                            .padding(.top, 19)
+                            .padding(.bottom, 21)
+                            .padding(.leading, 21)
+                            .padding(.trailing, 19)
+                            .background(Styles.lightBlue)
+                            .cornerRadius(50)
+                            .padding()
+                    }
                 }
             case .loading:
                 Text("Loading...")

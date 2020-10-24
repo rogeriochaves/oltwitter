@@ -20,6 +20,7 @@
 		90418C64253C314000D5806E /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 90418C5A253C313300D5806E /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		90418C6A253C383300D5806E /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90418C69253C383300D5806E /* AppState.swift */; };
 		906A7C1C253CA43B0005ABC3 /* LinkedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906A7C1B253CA43B0005ABC3 /* LinkedText.swift */; };
+		90A3A0992544420A0016FAAB /* NewTweetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A3A0982544420A0016FAAB /* NewTweetScreen.swift */; };
 		90B3A1EF2540B8C300361E33 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B3A1EE2540B8C300361E33 /* LoginScreen.swift */; };
 		90B3A1F52540C32300361E33 /* AccountScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B3A1F42540C32300361E33 /* AccountScreen.swift */; };
 		90B3A1F92540CADA00361E33 /* userTimeline.json in Resources */ = {isa = PBXBuildFile; fileRef = 90B3A1F82540CADA00361E33 /* userTimeline.json */; };
@@ -148,6 +149,7 @@
 		90418C51253C313300D5806E /* Swifter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifter.xcodeproj; path = "Swifter-master/Swifter.xcodeproj"; sourceTree = "<group>"; };
 		90418C69253C383300D5806E /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		906A7C1B253CA43B0005ABC3 /* LinkedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedText.swift; sourceTree = "<group>"; };
+		90A3A0982544420A0016FAAB /* NewTweetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTweetScreen.swift; sourceTree = "<group>"; };
 		90B3A1EE2540B8C300361E33 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		90B3A1F42540C32300361E33 /* AccountScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScreen.swift; sourceTree = "<group>"; };
 		90B3A1F82540CADA00361E33 /* userTimeline.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = userTimeline.json; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 				90B3A1EE2540B8C300361E33 /* LoginScreen.swift */,
 				90B3A1F42540C32300361E33 /* AccountScreen.swift */,
 				90B3A20225421DF900361E33 /* ProfileScreen.swift */,
+				90A3A0982544420A0016FAAB /* NewTweetScreen.swift */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				90D03A20253C2F670074D0E4 /* ContentView.swift in Sources */,
 				902248FE253C7AA100C79A52 /* AsyncImage.swift in Sources */,
 				90224905253C7B1600C79A52 /* ImageLoader.swift in Sources */,
+				90A3A0992544420A0016FAAB /* NewTweetScreen.swift in Sources */,
 				90D03A1E253C2F670074D0E4 /* oltwitterApp.swift in Sources */,
 				906A7C1C253CA43B0005ABC3 /* LinkedText.swift in Sources */,
 				902248F1253C737D00C79A52 /* TweetView.swift in Sources */,

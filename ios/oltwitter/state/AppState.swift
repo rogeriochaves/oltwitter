@@ -110,10 +110,10 @@ class AppState: ObservableObject {
         }
     }
 
-    func fetchNewTweets() {
+    func fetchNewTweets(force : Bool = false) {
         let now = Date().currentTimeMillis()
         let threeMinutes: Int64 = 1000 * 60 * 1;
-        if now - lastFetch < threeMinutes {
+        if !force && now - lastFetch < threeMinutes {
             return
         }
 
@@ -212,6 +212,17 @@ class AppState: ObservableObject {
                 if case .loading = self.users[screenName] {
                     self.users[screenName] = .error(error.localizedDescription)
                 }
+            })
+        }
+    }
+
+    func tweet(text : String, success: @escaping () -> ()) {
+        if let client = getClient() {
+            client.postTweet(status: text, success: { json in
+                self.fetchNewTweets(force: true)
+                success()
+            }, failure: { error in
+                print("error", error.localizedDescription)
             })
         }
     }

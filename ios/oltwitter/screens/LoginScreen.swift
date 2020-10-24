@@ -18,8 +18,9 @@ struct LoginScreen: View {
             blue.ignoresSafeArea()
             VStack {
                 VStack(alignment: .leading) {
-                    Text("good ol'").font(.custom("American Typewriter", size: 30))
-                    Text("twitter").font(.custom("American Typewriter", size: 100))
+                    Text("good ol'").font(.custom("American Typewriter", size: 25))
+                        .padding(.leading, 20)
+                    Text("twitter").font(.custom("American Typewriter", size: 90))
                         .padding(.top, -30)
                 }.foregroundColor(white)
                 if (state.authError != nil) {

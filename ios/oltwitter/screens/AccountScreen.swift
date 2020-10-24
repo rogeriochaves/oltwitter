@@ -85,22 +85,24 @@ struct AccountScreen: View {
     }
 
     var body: some View {
-        if let user = state.authUser {
-            Form {
-                Section(header: Text("Profile")) {
-                    profile(user)
-                }
-                Section {
-                    Button(action: state.logout, label: {
-                        Text("Sign out").foregroundColor(.red)
-                    })
-                }.onAppear() {
-                    if let user = state.authUser {
-                        state.fetchUser(screenName: user.screenName)
+        ZStack {
+            if let user = state.authUser {
+                Form {
+                    Section(header: Text("Profile")) {
+                        profile(user)
+                    }
+                    Section {
+                        Button(action: state.logout, label: {
+                            Text("Sign out").foregroundColor(.red)
+                        })
                     }
                 }
+                .navigationBarTitle("Me", displayMode: .inline)
             }
-            .navigationBarTitle("Me", displayMode: .inline)
+        }.onAppear() {
+            if let user = state.authUser {
+                state.fetchUser(screenName: user.screenName)
+            }
         }
     }
 }

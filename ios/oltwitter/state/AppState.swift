@@ -237,6 +237,6 @@ func saveAuthUser(key: String, authUser: AuthUser?) {
             UserDefaults.standard.set(encoded, forKey: key)
         }
     } else {
-        UserDefaults.standard.set(nil, forKey: key)
+        UserDefaults.standard.removeObject(forKey: key)
     }
 }

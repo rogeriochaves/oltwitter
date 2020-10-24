@@ -216,9 +216,9 @@ class AppState: ObservableObject {
         }
     }
 
-    func tweet(text : String, success: @escaping () -> ()) {
+    func tweet(text : String, replyTo: ReplyTo?, success: @escaping () -> ()) {
         if let client = getClient() {
-            client.postTweet(status: text, success: { json in
+            client.postTweet(status: text, inReplyToStatusID: replyTo?.idStr, success: { json in
                 self.fetchNewTweets(force: true)
                 success()
             }, failure: { error in
@@ -250,4 +250,9 @@ func saveAuthUser(key: String, authUser: AuthUser?) {
     } else {
         UserDefaults.standard.removeObject(forKey: key)
     }
+}
+
+struct ReplyTo {
+    var screenName : String
+    var idStr : String
 }

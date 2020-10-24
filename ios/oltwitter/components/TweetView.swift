@@ -10,6 +10,8 @@ import SwifteriOS
 
 struct TweetView: View {
     @EnvironmentObject var state : AppState
+    @State var isLinkActive: Bool = false
+    @State var destination : AnyView = AnyView(EmptyView())
     private let tweet:JSON
 
     init(_ tweet: JSON) {
@@ -115,10 +117,24 @@ struct TweetView: View {
             .padding(.horizontal, 10)
             .padding(.bottom, 6)
             Divider()
+            NavigationLink(destination: destination, isActive: $isLinkActive) {
+                EmptyView()
+            }
         }
         .padding(.top, 10)
         .font(.system(size: Styles.tweetFontSize))
         .contextMenu {
+            if let id = tweet["id_str"].string,
+               let screenName = tweet["user"]["screen_name"].string {
+                Button(action: {
+                    self.destination = AnyView(NewTweetScreen(
+                        replyTo: ReplyTo(screenName: screenName, idStr: id)
+                    ))
+                    self.isLinkActive = true
+                }) {
+                    Text("Reply")
+                }
+            }
             Button(action: {
                 if let id = tweet["id_str"].string,
                    let url = URL(string: "https://twitter.com/\(screenName)/status/\(id)") {

@@ -12,6 +12,14 @@ struct NewTweetScreen: View {
     @EnvironmentObject var state : AppState
     @State var text: String = ""
     @State var loading = false
+    var replyTo : ReplyTo?
+
+    init(replyTo : ReplyTo? = nil) {
+        self.replyTo = replyTo
+        if let screenName = self.replyTo?.screenName {
+            _text = State(initialValue: "@\(screenName) ")
+        }
+    }
 
     var body: some View {
         let remainingCharacters = 140 - text.count
@@ -39,7 +47,7 @@ struct NewTweetScreen: View {
         .navigationBarItems(
             trailing:
                 Button(action: {
-                    state.tweet(text: text, success: {
+                    state.tweet(text: text, replyTo: replyTo, success: {
                         self.presentationMode.wrappedValue.dismiss()
                     })
                 }) {

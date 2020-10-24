@@ -10,14 +10,36 @@ import SwiftUI
 struct LoginScreen: View {
     @EnvironmentObject var state : AppState
 
+    let white = Color(red: 1, green: 1, blue: 1)
+    let blue = Color(red: 35 / 255, green: 176 / 255, blue: 230 / 255)
+
     var body: some View {
-        VStack {
-            if (state.authError != nil) {
-                Text("Error: " + (state.authError ?? ""))
+        ZStack {
+            blue.ignoresSafeArea()
+            VStack {
+                VStack(alignment: .leading) {
+                    Text("good ol'").font(.custom("American Typewriter", size: 30))
+                    Text("twitter").font(.custom("American Typewriter", size: 100))
+                        .padding(.top, -30)
+                }.foregroundColor(white)
+                if (state.authError != nil) {
+                    Text("Error: " + (state.authError ?? ""))
+                }
+                Button(action: state.login, label: {
+                    HStack {
+                        Image("twitterlogo")
+                            .renderingMode(.original)
+                            .resizable()
+                            .frame(width: 32, height: 25)
+                        Text("Sign in with Twitter")
+                    }
+                        .foregroundColor(blue)
+                        .padding(.horizontal, 60)
+                        .padding(.vertical, 20)
+                        .background(white)
+                        .cornerRadius(50)
+                }).padding(.top, 50)
             }
-            Button(action: state.login, label: {
-                Text("Sign in with twitter")
-            })
         }
     }
 }
@@ -25,5 +47,6 @@ struct LoginScreen: View {
 struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
         LoginScreen()
+            .environmentObject(AppState())
     }
 }

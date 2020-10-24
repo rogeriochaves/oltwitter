@@ -98,7 +98,9 @@ struct TweetView: View {
                 }
             }
             HStack(alignment: .top) {
-                avatar().padding(.top, 4)
+                NavigationLink(destination: ProfileScreen(screenName: screenName)) {
+                    avatar().padding(.top, 4)
+                }
                 VStack(alignment: .leading, spacing: 0) {
                     NavigationLink(destination: ProfileScreen(screenName: screenName)) {
                         (

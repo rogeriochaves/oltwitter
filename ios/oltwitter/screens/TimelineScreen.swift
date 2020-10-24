@@ -13,9 +13,17 @@ struct IdentifiableJson : Identifiable {
     var value : JSON
 }
 
+enum ScrollPosition {
+    case top
+    case bottomWithNewTweets
+    case bottom
+}
+
 struct TimelineScreen: View {
     @EnvironmentObject var state : AppState
     @State var timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
+    @State private var scrollPosition : ScrollPosition = .top
+    @State var newTweetsVisible = 0
     private var hideTopBar : Bool
 
     init(hideTopBar: Bool = false) {
@@ -23,6 +31,10 @@ struct TimelineScreen: View {
     }
 
     func newTweetsButton() -> some View {
+        if case .bottom = self.scrollPosition {
+            return AnyView(EmptyView())
+        }
+
         switch state.newTweets {
         case let .success(newTweets):
             if newTweets.count > 45 {
@@ -97,6 +109,27 @@ struct TimelineScreen: View {
             case let .success(timeline):
                 ScrollView {
                     tweets(timeline)
+                        // best I could find to read ScrollView position without affecting scroll view itself
+                        // based on https://stackoverflow.com/a/64368200/996404
+                        .background(GeometryReader { geo -> Text in
+                            let posY = geo.frame(in: .global).minY
+
+                            // displays new tweets only if scroll is already on top, or user scrolled top
+                            // once when there were new tweets, so that we don't disrupt the scrolling when
+                            // new tweets come in, triggering in the user the addiction to go to the top
+                            // and check what's new constantly
+                            if posY > -110 {
+                                self.scrollPosition = .top
+                            } else if case let .success(newTweets) = self.state.newTweets,
+                                      case .top = self.scrollPosition,
+                                      newTweets.count > 0 {
+                                self.scrollPosition = .bottomWithNewTweets
+                            } else {
+                                self.scrollPosition = .bottom
+                            }
+
+                            return Text("")
+                        })
                 }
             case .loading:
                 Text("Loading...")

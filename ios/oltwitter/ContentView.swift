@@ -33,6 +33,14 @@ struct ContentView: View {
                     }
 
                     NavigationView {
+                        SearchScreen()
+                    }
+                    .tabItem {
+                        Image(systemName: "magnifyingglass")
+                        Text("Search")
+                    }
+
+                    NavigationView {
                         AccountScreen()
                     }
                     .tabItem {

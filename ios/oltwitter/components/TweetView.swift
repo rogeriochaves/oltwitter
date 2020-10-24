@@ -123,7 +123,7 @@ struct TweetView: View {
                 EmptyView()
             }
         }
-        .padding(.top, 10)
+        .padding(.top, 6)
         .font(.system(size: Styles.tweetFontSize))
         .contextMenu {
             if let id = tweet["id_str"].string,

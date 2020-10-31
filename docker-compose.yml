@@ -1,7 +1,0 @@
-version: "2"
-services:
-  app:
-    build: .
-    restart: always
-    network_mode: host
-    env_file: .env

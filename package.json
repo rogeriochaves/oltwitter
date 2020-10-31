@@ -1,15 +1,24 @@
 {
-  "name": "oltwitter",
-  "private": true,
+  "name": "heroku-redirect",
+  "version": "1.0.0",
+  "description": "Super simple Node app that redirects all requests for an old Heroku app to a new URL",
+  "main": "web.js",
   "dependencies": {
-    "@rails/actioncable": "^6.0.0",
-    "@rails/activestorage": "^6.0.0",
-    "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "4.2.2",
-    "turbolinks": "^5.2.0"
+    "express": "^4.15.3"
   },
-  "version": "0.1.0",
-  "devDependencies": {
-    "webpack-dev-server": "^3.11.0"
-  }
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node web.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenmickles/heroku-redirect.git"
+  },
+  "author": "Ken Mickles <ken@37i.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kenmickles/heroku-redirect/issues"
+  },
+  "homepage": "https://github.com/kenmickles/heroku-redirect#readme"
 }

@@ -51,7 +51,7 @@ struct LinkColoredText: View {
                 return Text(verbatim: text)
             case .link(let text):
                 return Text(verbatim: text)
-                    .foregroundColor(Styles.linkBlue)
+                    .foregroundColor(Styles.blueText)
             }
         }.reduce(Text(""), +)
     }

@@ -106,7 +106,7 @@ struct TweetView: View {
                         (
                             Text(tweet["user"]["name"].string ?? "")
                                 .bold()
-                                .foregroundColor(.black)
+                                .foregroundColor(Styles.black)
                             +
                             Text(" @\(screenName)")
                                 .foregroundColor(Styles.gray)
@@ -125,6 +125,7 @@ struct TweetView: View {
         }
         .padding(.top, 6)
         .font(.system(size: Styles.tweetFontSize))
+        .background(Styles.white)
         .contextMenu {
             if let id = tweet["id_str"].string,
                let screenName = tweet["user"]["screen_name"].string {

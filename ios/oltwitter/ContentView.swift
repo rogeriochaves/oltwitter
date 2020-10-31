@@ -12,8 +12,8 @@ struct ContentView: View {
     @EnvironmentObject var state : AppState
 
     init() {
-        UITabBar.appearance().backgroundColor = UIColor.label
-        UITabBar.appearance().barTintColor = UIColor.label
+        UITabBar.appearance().backgroundColor = UIColor.black
+        UITabBar.appearance().barTintColor = UIColor.black
         UINavigationBar.appearance().tintColor = UIColor.label
         UINavigationBar.appearance().barTintColor = Styles.uiLightBlue
     }

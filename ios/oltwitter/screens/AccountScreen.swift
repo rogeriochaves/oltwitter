@@ -96,13 +96,13 @@ struct AccountScreen: View {
                             UIApplication.shared.open(URL(string: "https://github.com/rogeriochaves/oltwitter/")!, options: [:], completionHandler: nil)
                         }) {
                             Text("GitHub Repo")
-                                .foregroundColor(Styles.linkBlue)
+                                .foregroundColor(Styles.blueText)
                         }
                         Button(action: {
                             UIApplication.shared.open(URL(string: "https://github.com/rogeriochaves/oltwitter/issues")!, options: [:], completionHandler: nil)
                         }) {
                             Text("Report an Issue")
-                                .foregroundColor(Styles.linkBlue)
+                                .foregroundColor(Styles.blueText)
                         }
                         Button(action: state.logout) {
                             Text("Sign out").foregroundColor(.red)

@@ -9,11 +9,8 @@ Access now: https://oltwitter.herokuapp.com/
 # Contributing
 
 Install Ruby 2.6+, Node.JS and yarn (🙄)
-Then Postgress `brew install postgresql`
 Then Ruby gems `bundle install`
 Then Javascript libs `rails webpacker:install`
-Then start the database server `pg_ctl -D /usr/local/var/postgres start`
-Then create the database and tables `rails db:create && rails db:migrate`
 Copy the .env.sample file to .env and change it with actual twitter credentials:
 ```
 TWITTER_CONSUMER_KEY=xxx

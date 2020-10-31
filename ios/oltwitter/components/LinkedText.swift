@@ -169,12 +169,8 @@ private struct LinkTapOverlay: UIViewRepresentable {
 
         view.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.didTapLabel(_:)))
-        let forceTouchGestureRecognizer = ForceTouchGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.didForceTouchLabel(_:)))
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.didLongPressLabel(_:)))
 
         view.addGestureRecognizer(tapGesture)
-        view.addGestureRecognizer(forceTouchGestureRecognizer)
-        view.addGestureRecognizer(longPressGestureRecognizer)
 
         return view
     }
@@ -247,24 +243,6 @@ private struct LinkTapOverlay: UIViewRepresentable {
             }
         }
 
-        @objc func didForceTouchLabel(_ gesture: ForceTouchGestureRecognizer) {
-            let location = gesture.location(in: gesture.view!)
-            guard let url = getUrl(location) else { return }
-
-            if case let .browser(url_) = url {
-                UIApplication.share(url_)
-            }
-        }
-
-        @objc func didLongPressLabel(_ gesture: UILongPressGestureRecognizer) {
-            let location = gesture.location(in: gesture.view!)
-            guard let url = getUrl(location) else { return }
-
-            if case let .browser(url_) = url {
-                UIApplication.share(url_)
-            }
-        }
-
         private func link(at point: CGPoint) -> LinkedResult? {
             guard !overlay.links.isEmpty else {
                 return nil
@@ -291,44 +269,4 @@ private class LinkTapOverlayView: UIView {
         newSize.height += 20 // need some extra space here to actually get the last line
         textContainer.size = newSize
     }
-}
-
-import UIKit.UIGestureRecognizerSubclass
-
-final class ForceTouchGestureRecognizer: UIGestureRecognizer {
-
-    private let threshold: CGFloat = 0.75
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-        super.touchesBegan(touches, with: event)
-        if let touch = touches.first {
-            handleTouch(touch)
-        }
-    }
-
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
-        super.touchesMoved(touches, with: event)
-        if let touch = touches.first {
-            handleTouch(touch)
-        }
-    }
-
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
-        super.touchesEnded(touches, with: event)
-        state = UIGestureRecognizer.State.failed
-    }
-
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
-        super.touchesCancelled(touches, with: event)
-        state = UIGestureRecognizer.State.failed
-    }
-
-    private func handleTouch(_ touch: UITouch) {
-        guard touch.force != 0 && touch.maximumPossibleForce != 0 else { return }
-
-        if touch.force / touch.maximumPossibleForce >= threshold {
-            state = UIGestureRecognizer.State.recognized
-        }
-    }
-
 }

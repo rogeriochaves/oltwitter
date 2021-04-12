@@ -4,6 +4,10 @@ class HomeController < ApplicationController
   before_action :authenticate, except: [:index, :error_test, :privacy]
 
   def index
+    if params[:debug]
+      session[:debug] = true
+    end
+
     if session[:auth]
       @tweets = Rails.cache.fetch("timeline_#{session[:auth]["info"]["id"]}", expires_in: 3.minutes) do
         puts "Fetching timeline..."

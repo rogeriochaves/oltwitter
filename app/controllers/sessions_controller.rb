@@ -1,15 +1,18 @@
 class SessionsController < ApplicationController
   def create
-    if session[:debug]
-      session[:debug] = nil
-      render plain: auth_hash.inspect
-      return
-    end
-
+    info = auth_hash.extra.raw_info
     session[:auth] = {
       access_token: auth_hash.extra.access_token.token,
       access_token_secret: auth_hash.extra.access_token.secret,
-      info: auth_hash.extra.raw_info
+      info: {
+        id: info.id,
+        profile_image_url_https: info.profile_image_url_https,
+        screen_name: info.screen_name,
+        statuses_count: info.statuses_count,
+        friends_count: info.friends_count,
+        followers_count: info.followers_count,
+        listed_count: info.listed_count,
+      }
     }
     redirect_to '/'
   end

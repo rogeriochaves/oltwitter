@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import SafariServices
+
+var authViewController : AuthViewController?
 
 struct LoginScreen: View {
     @EnvironmentObject var state : AppState
@@ -16,6 +19,9 @@ struct LoginScreen: View {
     var body: some View {
         ZStack {
             blue.ignoresSafeArea()
+            SafariView(onAppear: { viewController in
+                authViewController = viewController
+            })
             VStack {
                 VStack(alignment: .leading) {
                     Text("good ol'").font(.custom("American Typewriter", size: 25))
@@ -26,7 +32,9 @@ struct LoginScreen: View {
                 if (state.authError != nil) {
                     Text("Error: " + (state.authError ?? ""))
                 }
-                Button(action: state.login, label: {
+                Button(action: {
+                    state.login(presentingFrom: authViewController)
+                }, label: {
                     HStack {
                         Image("twitterlogo")
                             .renderingMode(.original)
@@ -49,5 +57,28 @@ struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
         LoginScreen()
             .environmentObject(AppState())
+    }
+}
+
+class AuthViewController: UIViewController {}
+
+extension AuthViewController: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+struct SafariView: UIViewControllerRepresentable {
+    typealias UIViewControllerType = AuthViewController
+
+    let onAppear : (AuthViewController) -> Void
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> AuthViewController {
+        let viewController = AuthViewController()
+        onAppear(viewController)
+        return viewController
+    }
+
+    func updateUIViewController(_ uiViewController: AuthViewController, context: UIViewControllerRepresentableContext<SafariView>) {
     }
 }

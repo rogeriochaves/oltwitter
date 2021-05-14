@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwifteriOS
+import SafariServices
 
 class AppState: ObservableObject {
     @Published var authUser : AuthUser?
@@ -26,7 +27,7 @@ class AppState: ObservableObject {
         self.imageLoader = ImageLoader()
     }
 
-    func login() {
+    func login(presentingFrom: AuthViewController?) {
         let swifter = Swifter(
             consumerKey: Utils.envVar("TWITTER_CONSUMER_KEY")!,
             consumerSecret: Utils.envVar("TWITTER_CONSUMER_SECRET")!
@@ -34,7 +35,7 @@ class AppState: ObservableObject {
 
         swifter.authorize(
             withCallback: URL(string: "oltwitter://")!,
-            presentingFrom: nil,
+            presentingFrom: presentingFrom,
             success: { accessToken, response in
                 if let access = accessToken {
                     self.saveLogin(accessToken: access)

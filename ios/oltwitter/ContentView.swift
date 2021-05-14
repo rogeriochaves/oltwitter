@@ -10,6 +10,7 @@ import SwifteriOS
 
 struct ContentView: View {
     @EnvironmentObject var state : AppState
+    @State private var selectedItem = 1
 
     init() {
         UITabBar.appearance().backgroundColor = UIColor.black
@@ -23,7 +24,7 @@ struct ContentView: View {
             if (state.authUser == nil) {
                 LoginScreen()
             } else {
-                TabView {
+                TabView (selection: $selectedItem) {
                     NavigationView {
                         TimelineScreen(hideTopBar: true)
                     }
@@ -38,6 +39,16 @@ struct ContentView: View {
                     .tabItem {
                         Image(systemName: "magnifyingglass")
                         Text("Search")
+                    }
+
+                    Text("")
+                    .tabItem {
+                        Image(systemName: "bell.fill")
+                        Text("Notifications")
+                    }
+                    .onAppear() {
+                        UIApplication.shared.open(URL(string: "https://twitter.com/notifications")!, options: [:], completionHandler: nil)
+                        self.selectedItem = 1
                     }
 
                     NavigationView {

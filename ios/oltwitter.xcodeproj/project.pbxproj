@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9013C44426505136002E4BA0 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9013C44326505136002E4BA0 /* Toast.swift */; };
 		902248CC253C478100C79A52 /* TimelineScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902248CB253C478100C79A52 /* TimelineScreen.swift */; };
 		902248DA253C67D800C79A52 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902248D9253C67D800C79A52 /* Utils.swift */; };
 		902248DE253C682D00C79A52 /* .env in Resources */ = {isa = PBXBuildFile; fileRef = 902248DD253C682D00C79A52 /* .env */; };
@@ -137,6 +138,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9013C44326505136002E4BA0 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		902248CB253C478100C79A52 /* TimelineScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineScreen.swift; sourceTree = "<group>"; };
 		902248D9253C67D800C79A52 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		902248DD253C682D00C79A52 /* .env */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .env; path = ../.env; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				902248F0253C737D00C79A52 /* TweetView.swift */,
 				902248FD253C7AA100C79A52 /* AsyncImage.swift */,
 				906A7C1B253CA43B0005ABC3 /* LinkedText.swift */,
+				9013C44326505136002E4BA0 /* Toast.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -558,6 +561,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				902248DA253C67D800C79A52 /* Utils.swift in Sources */,
+				9013C44426505136002E4BA0 /* Toast.swift in Sources */,
 				902248F7253C77D900C79A52 /* Styles.swift in Sources */,
 				90418C6A253C383300D5806E /* AppState.swift in Sources */,
 				90B3A1F52540C32300361E33 /* AccountScreen.swift in Sources */,
@@ -729,6 +733,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"oltwitter/Preview Content\"";
 				DEVELOPMENT_TEAM = XC2B8QXW6P;
 				ENABLE_PREVIEWS = YES;
@@ -752,6 +757,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"oltwitter/Preview Content\"";
 				DEVELOPMENT_TEAM = XC2B8QXW6P;
 				ENABLE_PREVIEWS = YES;

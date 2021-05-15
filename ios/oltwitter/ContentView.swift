@@ -59,6 +59,12 @@ struct ContentView: View {
                         Text("Me")
                     }
                 }.accentColor(Styles.lightBlue)
+                .overlay(
+                    overlayView: Toast.init(dataModel: Toast.ToastDataModel.init(
+                                                title: state.toastContent.1,
+                                                image: state.toastContent.0),
+                                            show: $state.showToastOverlay),
+                    show: $state.showToastOverlay)
             }
         }
     }

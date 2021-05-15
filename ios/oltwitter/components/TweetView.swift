@@ -127,6 +127,21 @@ struct TweetView: View {
         .font(.system(size: Styles.tweetFontSize))
         .background(Styles.white)
         .contextMenu {
+            if let id = tweet["id_str"].string {
+                if state.likedTweets.contains(id) {
+                    Button(action: {
+                        state.unlikeTweet(id: id)
+                    }, label: {
+                        Text("Unlike")
+                    })
+                } else {
+                    Button(action: {
+                        state.likeTweet(id: id)
+                    }, label: {
+                        Text("Like")
+                    })
+                }
+            }
             if let id = tweet["id_str"].string,
                let screenName = tweet["user"]["screen_name"].string {
                 Button(action: {

@@ -17,6 +17,9 @@ class AppState: ObservableObject {
     @Published var moreTweets : ServerData<[JSON]> = .notAsked
     @Published var users : [String: ServerData<JSON>] = [:]
     @Published var userTimelines : [String: ServerData<[JSON]>] = [:]
+    @Published var showToastOverlay = false
+    @Published var toastContent : (String, String) = ("checkmark", "")
+    @Published var likedTweets : [String] = []
     var firstTweetId : Int? = nil
     var lastTweetId : Int? = nil
     var imageLoader : ImageLoader
@@ -225,6 +228,46 @@ class AppState: ObservableObject {
             }, failure: { error in
                 print("error", error.localizedDescription)
             })
+        }
+    }
+
+    func likeTweet(id : String) {
+        if let client = getClient() {
+            client.favoriteTweet(forID: id, success: { json in
+                self.likedTweets.append(id)
+                self.showToast("checkmark", "Liked")
+            }, failure: { error in
+                print("error", error.localizedDescription)
+                if error.localizedDescription.contains("You have already favorited") {
+                    self.unlikeTweet(id: id)
+                } else {
+                    self.showToast("xmark", "Error, could not like the tweet")
+                }
+            })
+        }
+    }
+
+    func unlikeTweet(id : String) {
+        if let client = getClient() {
+            client.unfavoriteTweet(forID: id, success: { json in
+                self.likedTweets.removeAll(where: { str in str == id })
+                self.showToast("checkmark", "Unliked")
+            }, failure: { error in
+                print("error", error.localizedDescription)
+                self.showToast("xmark", "Error, could not unlike the tweet")
+            })
+        }
+    }
+
+    func showToast(_ image: String, _ text: String) {
+        self.toastContent = (image, text)
+        withAnimation {
+            self.showToastOverlay = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            withAnimation {
+                self.showToastOverlay = false
+            }
         }
     }
 }

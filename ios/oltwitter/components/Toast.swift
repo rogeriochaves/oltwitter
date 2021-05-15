@@ -2,7 +2,7 @@
 //  Toast.swift
 //  oltwitter
 //
-//  Created by Rogerio Chaves on 15/05/21.
+//  Source: https://prafullkumar77.medium.com/swiftui-how-to-make-toast-and-notification-banners-bc8aae313b33
 //
 
 import SwiftUI

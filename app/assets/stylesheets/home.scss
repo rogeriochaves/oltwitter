@@ -75,7 +75,9 @@ body {
   padding: 10px 0 4px;
 }
 
-#signup-btn a {
+#signup-btn {
+  width: 100%;
+  height: auto;
   background: #fa2;
   background: linear-gradient(
     180deg,

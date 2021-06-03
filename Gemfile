@@ -55,3 +55,4 @@ gem 'twitter'
 gem 'omniauth-twitter'
 gem "sentry-raven"
 gem 'dotenv-rails', groups: [:development, :test]
+gem "omniauth-rails_csrf_protection"
